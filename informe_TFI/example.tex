@@ -15,6 +15,375 @@
 % Las secciones se inician con \section, si se quiere una sección sin número se
 % pueden usar las funciones \sectionanum (sección sin número) o la función
 % \sectionanumnoi para crear el mismo título sin numerar y sin aparecer en el índice
+
+\section{Inicio}
+
+\subsection{Introducción}
+
+Año tras año la demanda de energía eléctrica mundial en general va en aumento, lo cual crea la necesidad de disponer de la energía eléctrica suficiente para satisfacer las demandas de consumo. Tanto o más importante como la producción energética, es lograr un máximo aprovechamiento de ésta mejorando el rendimiento de los equipos y de los propios receptores o instalaciones que consumen energía.
+
+\subsection{Objetivo}
+
+Dado que los paneles fotovoltaicos no entregan una potencia constante, ni corriente contante, ni tensión constante, hace falta un circuito que pueda manejarse bien dentro de ciertas variaciones.
+
+El objetivo de este trabajo es, de entre todas las tecnologías y topologías de convertidores electrónicos, seleccionar la más apropiada, que pueda funcionar adaptándose a las variaciones de los paneles fotovoltaicos, y que sea la más eficiente para campos fotovoltaicos de alrededor de 5 kWp y quede dispuesta para que otro convertidor la inyecte a red o utilizar en DC. 
+
+\subsection{Justificación}
+
+En los últimos años se ha despertado un creciente interés por el estudio de los problemas que afectan a la red eléctrica y que degradan la calidad del suministro que reciben los usuarios de la misma. La problemática es muy variada dando lugar a un amplio campo de estudio que, entre otros muchos temas incluye los efectos de la creciente deslocalización de los sistemas de generación, debido a la gran expansión de las energías renovables, y el desarrollo de equipos de compensación activa para la mejora de la calidad del suministro y el ahorro energético.
+
+En este informe se desarrolla el caso del convertidor semi puente boost compacto, adjunto en la \hyperref[fig:topologiareferencia]{figura 1}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/topologiaReferencia}
+	\caption[]{Convertidor semipuente boost compacto.}
+	\label{fig:topologiareferencia}
+\end{figure}
+
+\subsection{Requerimientos de diseño}
+
+\begin{itemize}
+	\item Tensión de entrada: $48 \ V_{DC}$
+	\item Tensión de salida: $400 \ V_{DC}$
+	\item Rango de corriente: $0-40 \ A$
+	\item Se pueden colocar módulos DC-DC en paralelo.
+\end{itemize}
+
+\clearpage
+
+
+\section{Marco teórico}
+
+\subsection{Descripción general}
+
+A la entrada del convertidor se conectan los paneles solares, modelados a través de una fuente de tensión constante $V_{in}$. El inductor de entrada se usa para atenuar el ripple en la corriente de entrada $i_{in}$. Dependiendo del requerimiento de ripple en la corriente de entrada, o de la impedancia de salida de la fuente de alimentación es posible eliminar o despreciar el efecto del inductor $L_{in}$. Se usa un transformador de elevador que permita obtener la tensión de salida deseada para el requerimiento de diseño, partiendo de la alimentación a utilizar. Es posible también utilizarlo en una relación $1:1$ si simplemente es necesario un aislamiento. Es posible modelar también el transformador con su inductancia de dispersión $L_{LKp}$ y su inductancia de magnetización $L_{mp}$ referidas al primario.
+
+Se une uno de los bornes del devanado primario del transformador con el nodo entre los capacitores de entrada $C_U$ y $C_L$, siendo que su tensión respecto de tierra es como una fuente de alimentación obtenida a partir de la carga del capacitor $C_L$ y valor $v_L$.  Se tiene una rama con transistores IGBT, formada por un dispositivo superior y otro inferior. Se tienen diodos de recuperación inversa en ambas, que pueden ser los incluidos dentro del mismo encapsulado. Se trabaja con modulación PWM a una frecuencia de conmutación $f_s=1/T_s$. Es importante dejar un pequeño tiempo muerto antes del encendido de cada uno de los IGBT, de modo de evitar un cortocircuito con la fuente. El otro extremo del transformador se conecta entre los IGBT, y tiene una tensión media $v_{SL}$ con respecto al terminal de tierra, conmutando de esa forma entre $v_{bus}$ y GND.
+
+Se tiene así entonces para la tensión del primario $v_P$:
+
+\begin{itemize}
+	\item $v_L$ cuando el IGBT inferior está cerrado.
+	\item $-v_U$ cuando el IGBT superior está cerrado.
+\end{itemize}
+
+Se tiene la salida del secundario del transformador conectada a un rectificador doblador de tensión con los diodos $D_{RL}$ y $D_{RU}$, y por los capacitores $C_{RU}$ y $C_{RL}$, estos últimos filtran la tensión de salida $V_o$, y brindando de acuerdo a la solicitud de la carga una determinada $I_o$. La energía promedio se extrae del panel solar a través del valor medio de $i_P$ del primario del transformador. Se tiene que el valor promedio $\overline{i}_{in}$ de la corriente de la fuente, igual al promedio $\overline{i}_P$.
+
+Partiendo del ciclo de trabajo, si \( d \), tal que \( 0 < d < 1 \), representa el ciclo de trabajo del interruptor \( S_U \), el valor promedio de la tensión en el punto medio de la pierna durante \( T_s \) está dado por \(\overline{v}_{SL} = d\overline{v}_{bus}\), donde \(\overline{v}_{bus}\) es el valor promedio de \( v_{bus} \) durante \( T_s \). En régimen estacionario, los valores promedios de las caídas de tensión sobre el inductor \( L_{in} \) y sobre la inductancia de magnetización \( L_{mp} \) deben ser cero. Por consiguiente, el valor promedio de la tensión sobre el interruptor \( S_L \) es igual al valor promedio de la tensión sobre el capacitor \( C_L \) y a la tensión de la fuente de alimentación, es decir:
+
+\[
+\overline{v}_{SL} = \overline{v}_{CL} = \overline{V}_{\text{in}}
+\]
+
+En conjunto con la condición \(\overline{v}_{SL} = d\overline{v}_{bus}\), se implica que:
+
+\[
+\overline{v}_{bus} = \frac{V_{in}}{d}
+\]
+
+Los capacitores de amortiguación \( C_r \) mitigan el apagado de los interruptores \( S_U \) y \( S_L \), retrasando el incremento de sus correspondientes tensiones \( v_{SU} \) y \( v_{SL} \) durante el apagado.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/formaOnda1}
+	\caption{Formas de onda para \( d \leq 0.5 \): (a) Señales de encendido \( S_U \) y \( S_L \). (b) \( i_p \), \( \overline{i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( i_s \), \( i_{DRL} \) e \( i_{DRU} \).}
+	\label{fig:formaonda1}
+\end{figure}
+
+\subsection{Operación}
+
+Para realizar un análisis del comportamiento del convertidor en estado estacionario, se asumirá que los capacitores \( C_L \), \( C_U \), \( C_{RU} \) y \( C_{RL} \) son lo suficientemente grandes como para mantener constante la tensión sobre sus bornes durante un ciclo \( T_s \) de PWM. Por lo tanto, para este análisis, las tensiones \( v_L \) y \( v_U \) serán reemplazadas (a partir de las ecuaciones (3-1) y (3-2)) por fuentes de tensión constante de valor \( V_{in} \) y \( V_U = \frac{V_{in}(1 - d)}{d} \), respectivamente, que corresponden a sus valores medios en estado estacionario. De igual manera, las tensiones \( v_{RU} \) y \( v_{RL} \) serán reemplazadas por las tensiones constantes \( V_{RU} \) y \( V_{RL} \), que corresponden a sus valores medios teóricos en estado estacionario. Además, en este análisis no se considerarán los capacitores de snubber \( C_r \), por lo que se asumirá que la conmutación de corriente de un interruptor al otro se realiza de manera instantánea.
+
+La\hyperref[fig:formaonda1]{figura 2} ilustra las formas de onda que permiten comprender el funcionamiento del circuito del convertidor. Como se puede observar, estas figuras corresponden al convertidor operando con un ciclo de trabajo del interruptor \( S_U \), \( d < 0.5 \). La \hyperref[fig:formaonda1]{figura 2}(a) ilustra las señales de encendido de los interruptores \( S_U \) y \( S_L \). Nótese la introducción de tiempos muertos de duración \( t_D \) entre el apagado y el encendido de ambos interruptores. La \hyperref[fig:formaonda1]{figura 2}(b) muestra la corriente \( i_p \) por el primario del transformador, su valor medio \( \overline{i}_p \), y la corriente de magnetización \( i_m \). En la \hyperref[fig:formaonda1]{figura 2}(c) se presentan las formas de onda de las corrientes \( i_{SL} \) e \( i_{SU} \) a través de los interruptores \( S_L \) y \( S_U \), respectivamente; y en la \hyperref[fig:formaonda1]{figura 2}(d) las corrientes \( i_{DRL} \) e \( i_{DRU} \) a través de los diodos del rectificador, y la corriente \( i_s \) por el secundario del transformador.
+
+\subsection{Modos de operación}
+
+Se analiza la figura de las formas de onda de forma detallada. Para eso, se parte del hecho de que durante un período de conmutación, o sea, $T_s$, el convertidor tiene cuatro modos de operación que corresponden a los ilustrados en la \hyperref[fig:modosoperacion]{figura 4}.
+
+\begin{enumerate}
+	\item Modo 1 (Periodo \( t_d = t_1 - t_0 \))
+	\item Modo 2 (Periodo \( t_a = t_2 - t_1 \))
+	\item Modo 3 (Periodo \( t_b = t_3 - t_2 \))
+	\item Modo 4 (Periodo \( t_c = t_4 - t_3 \))
+\end{enumerate}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/modosOperacion}
+	\caption{Modos de operación del convertidor.}
+	\label{fig:modosoperacion}
+\end{figure}
+
+
+\subsubsection{Modo 1}
+
+En el instante \( t_0 \), cuando se apaga el interruptor \( S_L \), la corriente \( i_p \) alcanza su valor máximo positivo \( i_p(t_0) \) y pasa instantáneamente a circular por el diodo  \( D_U \) del interruptor \( S_U \). El circuito correspondiente a este intervalo se muestra en la Fig. 3-4(a). En este modo de operación, la tensión aplicada al primario del transformador es \( v_p = -V_U \). La corriente del secundario circula por el diodo \( D_{RU} \), aplicando una tensión \( v_s = V_{RU} \) al secundario del transformador, y una tensión \( v_{LKp} = -(V_U + nV_{RU}) \) sobre la inductancia de dispersión. Así, durante este intervalo, la corriente \( i_m \) decrece con pendiente \( -V_U / L_{mp} \) y la corriente por la inductancia de dispersión decrece con pendiente \( -(V_U + nV_{RU}) / L_{LKp} \). La corriente \( i_p \) por el primario del transformador (suma de la corriente por la inductancia de magnetización y la corriente por la inductancia de dispersión) decrece con pendiente:
+
+\[
+-p_3 = -\left( \frac{V_U}{L_p} + n \frac{V_{RU}}{L_{LKp}} \right)
+\]
+
+donde \( L_p = L_{LKp} \parallel L_{mp} \). Luego del intervalo \( t_D \) (tiempo muerto), contado a partir de \( t_0 \), se activa el gate del IGBT \( S_U \). El encendido de \( S_U \) se realiza a tensión y corriente cero, pues \( i_p \), que es positiva, circula en ese instante por el diodo en antiparalelo con \( S_U \), evitando pérdidas de conmutación. Este modo finaliza en el instante \( t_1 \), cuando la corriente \( i_p \) iguala a la corriente \( i_m \), momento en el que \( D_{RU} \) se apaga naturalmente cuando su corriente se hace cero.
+
+\subsubsection{Modo 2}
+
+Al inicio de este modo de operación, la corriente que circula por el primario del transformador es igual a la corriente por la inductancia de magnetización, con un valor de \( i_p(t_1) \). Después del instante \( t_1 \), la corriente \( i_p \) se vuelve menor que la corriente de magnetización \( i_m \), haciendo que la corriente del secundario circule por el diodo \( D_{RL} \). . La corriente \( i_{DRL} \) crece desde cero con una pendiente limitada, evitando pérdidas durante el encendido del diodo \( D_{RL} \). La tensión aplicada sobre la inductancia de magnetización sigue siendo \( v_p = -V_U \), mientras que la tensión en el secundario del transformador es \( v_s = -V_{RL} \). Por lo tanto, la corriente \( i_m \) decrece con pendiente \( -\frac{V_U}{L_{mp}} \) y la corriente por la inductancia de dispersión decrece con pendiente \( -\frac{V_U - nV_{RL}}{L_{LKp}} \). La corriente \( i_p \) decrece con pendiente:
+
+\[
+-p_4 = -\left( \frac{V_U}{L_p} + n \frac{V_{RL}}{L_{LKp}} \right)
+\]
+
+donde \( L_p = L_{LKp} \parallel L_{mp} \). El Modo 2 finaliza en \( t_2 = dT \), cuando se apaga el IGBT \( S_U \).
+
+\subsubsection{Modo 3}
+
+Cuando se apaga el IGBT \( S_U \), la corriente \( i_p \) alcanza su máximo negativo \( i_p(t_2) \) y pasa instantáneamente a circular por \( D_L \) del IGBT \( S_L \). El diodo \( D_{RL} \) del rectificador permanece en conducción, y su corriente comienza a decrecer. La tensión sobre la inductancia de magnetización del transformador pasa a ser \( v_p = V_{in} \), mientras que la tensión en el secundario sigue siendo \( v_s = -V_{RL} \). La corriente \( i_m \) crece con pendiente \( \frac{V_{in}}{L_{mp}} \), y la corriente por la inductancia de dispersión crece con pendiente \( \frac{V_{in} + nV_{RL}}{L_{LKp}} \). La corriente por el primario crece con la pendiente:
+
+\[
+p_1 = \left( \frac{V_{in}}{L_p} + n \frac{V_{RL}}{L_{LKp}} \right)
+\]
+
+donde \( L_p = L_{LKp} \parallel L_{mp} \). Para asegurar el encendido a tensión y corriente cero de \( S_L \), la activación de este IGBT debe hacerse antes de que la corriente \( i_p \) cambie de signo. Esta es una condición de diseño para el correcto funcionamiento del convertidor, asegurando que en el instante de activación la corriente esté circulando por el diodo de recuperación inversa \( D_L \). Este modo finaliza en el instante \( t_3 \) cuando la corriente \( i_p \) iguala a la corriente \( i_m \), momento en el que el diodo \( D_{RL} \) del rectificador se apaga naturalmente al alcanzar su corriente cero.
+
+\subsubsection{Modo 4}
+
+Durante este intervalo, la corriente \( i_p \) que entra al primario del transformador supera a la corriente de magnetización \( i_m \), lo que lleva al encendido del diodo \( D_{RU} \). Este modo de operación coincide con el circuito ilustrado en la Figura 3-4(d). La tensión en el primario del transformador permanece como \( v_p = V_{in} \), mientras que la tensión en el secundario se convierte en \( v_s = V_{RU} \). La corriente \( i_m \) aumenta con una pendiente de \( \frac{V_{in}}{L_{mp}} \), y la corriente a través de la inductancia de dispersión aumenta con una pendiente de \( \frac{V_{in} - nV_{RU}}{L_{LKp}} \). La corriente \( i_p \) también aumenta con una pendiente dada por:
+
+\[
+p_2 = \left( \frac{V_{in}}{L_p} - n \frac{V_{RU}}{L_{LKp}} \right)
+\]
+
+donde \( L_p = L_{LKp} \parallel L_{mp} \) (3-6). Este modo de operación concluye en \( t_4 = T_s \), momento en que se apaga el IGBT \( S_L \) y se reinicia al Modo 1.
+
+\subsection{Estado estacionario}
+
+Para caracterizar a un convertidor como el trabajado en este informe, se desea conocer su ganancia en tensión $V_o/V_{in}$. Se sabe que este circuito no tiene un comportamiento lineal, por lo que no se puede hallar una ecuación cerrada que exprese la ganancia. Para ello, se toma como referencia del material bibliográfico, un estudio realizado, que obtiene de manera analítica un conjunto de cuatro ecuaciones no lineales con cuatro incógnitas, que definen el comportamiento del convertidor en estado estacionario y permiten encontrar su ganancia de tensión para cualquier punto de operación. Para no depender de la relación de transformación, se trata con las tensiones intervinientes referidas al primario del transformador. 
+
+Se tiene la siguiente \hyperref[fig:corrienteestacionario]{característica de la forma de onda de corriente para estado estacionario}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/corrienteEstacionario}
+	\caption{}
+	\label{fig:corrienteestacionario}
+\end{figure}
+
+En donde las pendientes están dadas por:
+
+$$
+\begin{cases}
+	m_1 = \frac{V_U - V_0}{R_L L_{LKp}} \\
+	m_2 = -\frac{V_{in} + V_0}{R_L L_{LKp}} \\
+	m_3 = \frac{V_{in} - V_0}{R_U L_{LKp}} \\
+	m_4 = -\frac{V_U + V_0}{R_U L_{LKp}}
+\end{cases}
+$$
+
+Finalmente, las cuatro incógnitas son:
+
+\begin{itemize}
+	\item $V_{RU}'$
+	\item $V_{bus}$
+	\item $t_b$
+	\item $t_d$
+\end{itemize}
+
+Siendo posible resolver de forma numérica ecuaciones para obtener valores para cada punto específico de operación dado por:
+
+\begin{itemize}
+	\item $V_{in}$
+	\item $I_o'$
+	\item $V_o'$
+\end{itemize}
+
+Y a partir de esto obtener la relación $V_o'/V_{bus}$ deseada. Entonces, el sistema de cuatro ecuaciones que modelan el comportamiento del convertidor es:
+
+$$
+\begin{cases}
+	[V_{bus(pu)}-V_{in(pu)}-(V'_{o(pu)}-V'_{RU(pu)})]\frac{V'_{RU(pu)}}{V'_{o(pu)}}T_{s(pu)}=V_{bus(pu)}t_{b(pu)} \\
+	(V_{in(pu)}-V'_{RU(pu)})\left(\frac{V'_{o(pu)}-V'_{RU(pu)}}{V'_{o(pu)}}\right)T_{s(pu)}=V_{bus(pu)}t_{b(pu)} \\
+	I'_{o(pu)} = \frac{V'_{RU(pu)}}{2V'_{o(pu)}} \left(\frac{V_{in(pu)}+V'_{o(pu)}-V'_{RU(pu)}}{L_{LKp(pu)}}\right) 2\pi t_{b(pu)} \\
+	I'_{o(pu)} = \frac{V'_{o(pu)}-V'_{RU(pu)}}{2V'_{o(pu)}} \left(\frac{V_{bus(pu)}-V_{in(pu)}+V_{RU(pu)}}{L_{LKp(pu)}}\right)2\pi t_{d(pu)}\
+\end{cases}
+$$
+
+Se logran las siguientes curvas de regulación para las ecuaciones anteriores.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/eqV}
+	\caption{(a) $d \ vs. \ V_{in(pu)}$ y (b) $V_{bus(pu)} \ vs. \ V_{in(pu)}$; para $V'_{o(pu)}=1$ parametrizada en $I'_{o(pu)}$.}
+	\label{fig:eqv}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/eqI}
+	\caption{Ganancias del convertidor en función del ciclo de trabajo $d$ y de la corriente de salida $I'_{o(pu)}$.}
+	\label{fig:eqi}
+\end{figure}
+
+
+\subsection{Conmutación suave}
+
+También llamada ZVS (Zero Voltage Switching), se puede lograr bajo cierta condiciones y con un determinado rango de tensión de entrada y corriente de salida. El rango de conmutación suave está definido por la relación entre la inductancia de magnetización y la inductancia de dispersion del transformador $L_{mp}/L_{LKp}$, por el valor de los capacitores de snubber $C_r$ y el tiempo muerto $t_D$ entre el apagado de un IGBT y el encendido del otro.
+
+\subsubsection{Encendido a tensión cero de $S_U$}
+
+Esto es fácil de lograr, cuando se apaga $S_L$, $i_P$ pasa a circular por el diodo $D_U$, haciendo que la tensión se vaya a cero. En este momento $i_P$ está en su máximo valor positivo, por lo que se tiene un tiempo considerable para encender $S_U$ antes de que la corriente cambie de signo y despolarice el diodo $D_U$.
+
+\subsubsection{Encendido a tensión cero de $S_L$}
+
+Este encendido es más crítico que el anterior. En el instante $t_2$, cuando se apaga $S_U$, la corriente $i_P$ alcanza su mínimo y pasa a circular por el diodo $D_L$. La magnitud mínima $i_P(t_2)$ puede ser pequeña y a partir de ese momento la corriente por el primario del transforamdor comienza a crecer con una pendiente elevada, $p_1$. De esta forma, el tiempo muerto $t_D$ máximo a usar es reducido.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/suave1}
+	\caption{Curvas para \( t_D > t_z \): (a) Señales de encendido $S_U$ y $S_L$. (b) \( i_p \), \( \bar{i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( v_{SL} \) y \( v_{SU} \).}
+	\label{fig:suave1}
+\end{figure}
+
+\subsubsection{Tiempo muerto $t_D$}
+
+Luego del apagado de la llave $S_U$, para asegurar que la llave $S_L$ encienda a tensión cero, su activación debe realizarse antes de que $i_P$ cambie de negativa a positiva. Si se define $t_A$ como el tiempo contado desde $t_0$, hasta el instante en que la corriente cruza por cero en el punto A, y se define $t_z=(t_A-t_2)$ como el tiempo que tarda la corriente $i_P$ en cruzar por cero luego del momento $t_2$ en que se apagó $S_U$, para que la llave $S_L$ encienda a tensión cero, debe ser $t_D<t_z$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/tD}
+	\caption{Forma de onda de las corrientes $i_P$ e $i_m$ para: (a) $i_m(t_3)>0$ y (b) $i_m(t_3)<0$.}
+	\label{fig:td}
+\end{figure}
+
+Resulta necesario limitar el valor mínimo de la relación $L_{mp}/L_{LKp}$, además, al aumentar esta relación disminuye $t_{z(min)}$. Esto no es conveniente porque limita el tiempo muerto $t_D$, que es el tiempo que tienen las llaves en el apagado para llevar a cero las corrientes y realizar la carga o descarga de los capacitores de snubber. Por eso se define como relación de compromiso $L_{mp}/L_{LKp}=10$. Siendo que, para que el convertidor opere en conmutación suave en todo el rango $0.42<V_{in(pu)} < 0.9$, debe utilizarse un tiempo muerto $t_D\leq 0.48 \ \mu s$.
+
+\subsubsection{Efecto de los capacitores de snubber $C_r$}
+
+Los capacitores de snubber tienen la función de retardar el aumento de la tensión sobre las llaves $S_L$ y $S_U$ durante su apagado. Esto es esencial porque las llaves no pueden apagarse instantáneamente, sino que requieren un tiempo finito, conocido como tiempo de caída. Durante este período, es crucial retrasar el aumento de la tensión para minimizar las pérdidas. Aunque es deseable que los capacitores de snubber sean grandes para maximizar este retardo, se debe tener cuidado. Un exceso de tamaño podría retrasar también la caída de tensión en la llave próxima a encenderse, lo que resultaría en pérdidas adicionales durante su encendido.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/capSnubber}
+	\caption{Señales de encendido de $S_L$ y $S_U$, corriente $i_{SU}$ y tensiones $v_{SU}$ para distintos casos de valores de capacitancia de snubber.}
+	\label{fig:capsnubber}
+\end{figure}
+
+Para cada punto de operación del convertidor debe existir un valor óptimo de los capacitores de snubber $C_{ropt}$, que haga que la tensión sobre la llave próxima a encenderse llegue a cero justo en el instante de encendido.
+
+\subsubsection{Diseño de los capacitores de snubber $C_r$}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/energiaQ}
+	\caption{Energía $Q$ utilizada para el dimensionamiento de los capcaitores de snubber.}
+	\label{fig:energiaq}
+\end{figure}
+
+Para calcular el valor máximo que pueden tener los capacitores de snubber $C_r$, a fin de que la tensión haya llegado a cero antes de que se encuenda la llave $S_L$ en todo el rango de operación del convertidor, se calcula el área de la corriente $i_P$ durante el intervalo sombreado en la \hyperref[fig:energiaq]{figura 10}. Se define de esa manera $C_{r0}=Q/2V_{bus}$, $C_{r(pu)}=2\pi R_B C_{r0}/T_B$, aproximando de esa forma un valor $C_{r(pu)} \approx 0.02$ que asegura la conmutación suave para el rango de tensión $0.42 < V_{in(pu)} < 0.9$.
+
+
+\clearpage
+
+
+\section{Diseño del convertidor}
+
+\subsection{Características deseadas}
+
+Se parte del hecho de que cada panel solar tiene una potencia de aproximadamente $5 \ kWp$. Luego, con el fin de no sobredimensionar componentes tales como el transformador y cada componente del convertidor, se decide por utilizar 4 convertidores DC-DC en paralelo, de forma que aporten cada uno aproximadamente $1/4$ de la corriente de salida solicitada por medio de los requisitos de diseño. 
+
+Se define como máxima tensión de entrada $288 \ V$, la frecuencia de conmutación será de $f_s=50 \ kHz$. El diseño de cada convertidor será de $4 \ kW$Se definen además:
+
+\begin{itemize}
+	\item $V'_{oB}=n \ 400 \ V$
+	\item $I'_{oB}= \frac{P_n}{nV_o}=\frac{10}{n} \ A$
+\end{itemize}
+
+\subsection{Definición de la relación de vueltas del transformador y el rango de tensión de entrada}
+
+Para trabajar en conmutación suave, es conveniente trabajar con:
+
+$$
+0.42 < V_{in(pu)} < 0.9
+$$
+
+Por lo que se limita $V_{in(pu)} < 0.9$. Ahora, si se reemplaza, se tiene:
+
+$$
+n>\frac{V_{in(max)}}{0.9V_{oB}}
+$$
+
+
+Se decide por utilizar como tensión de alimentación $144 \ V$, equivalente a 3 paneles solares en serie. De esa forma, despreciando la caída de tensión en los diodos a la salida, así como la tensión de saturación de los IGBT de la entrada, se obtiene:
+
+$$
+n=\frac{400 \ V}{144 \ V} \approx 2.78
+$$
+
+Ahora, para contemplar las caídas de tensión de los componentes reales, se utilizará un margen de $5 \%$, logrando $n=2.91$.
+
+\subsection{Definición de los valores de inductancia de dispersión y magnetización del transformador}
+
+La impedancia base del convertidor a implementar viene dada por:
+
+$$
+R_B = \frac{V'_{oB}}{I'_{oB}}=\frac{137.45 \ V}{29.1 \ A}=4.72 \ \Omega
+$$
+
+El período de conmutación es $T_B=20 \ \mu s$, por lo que:
+
+$$
+L_{mp}=\frac{R_B T_B}{2 \pi}=15.02 \ \mu H
+$$
+
+Y finalmente:
+
+$$
+L_{LKp} = 0.1 \ L_{mp} = 1.5 \ \mu H
+$$
+
+\subsection{Definición de los valores de los capacitores}
+
+Se define un valor alto para el capacitor $C_L=100 \ \mu F$ para poder mitigar el ripple de la tensión de entrada. Y, para el otro capacitor, se tiene $C_U=22 \ \mu F$, suavizando así el ripple de $v_{bus}$ y no volviendo muy lenta la dinámica del sistema. 
+
+Ahora, para obtener el valor de los capacitores de salida, se ajustará el valor por simulación, el valor final se verá reflejado en la explicación del siguiente apartado.
+
+
+\clearpage
+
+
+\section{Simulación}
+
+\subsection{Simulación ideal}
+
+Para una simulación con componentes ideales, se trabaja con el software de simulación PLECS, en su versión 4.8 (corriendo en sistema operativo MacOS). Se parte del siguiente esquemático a implementar. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../schematic}
+	\caption{Circuito esquemático en PLECS.}
+	\label{fig:schematic}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
 \section{Informes con \LaTeX}
 
 % SUB-SECCIÓN

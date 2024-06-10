@@ -1,0 +1,43 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Inicio}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introducción}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Objetivo}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Justificación}{1}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Requerimientos de diseño}{2}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Marco teórico}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Descripción general}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Operación}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Modos de operación}{5}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Modo 1}{6}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Modo 2}{7}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Modo 3}{7}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Modo 4}{8}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Estado estacionario}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Conmutación suave}{11}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Encendido a tensión cero de $S_U$}{11}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Encendido a tensión cero de $S_L$}{12}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Tiempo muerto $t_D$}{12}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Efecto de los capacitores de snubber $C_r$}{13}{subsubsection.2.5.4}%
+\contentsline {subsubsection}{\numberline {2.5.5}Diseño de los capacitores de snubber $C_r$}{14}{subsubsection.2.5.5}%
+\contentsline {section}{\numberline {3}Diseño del convertidor}{16}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Características deseadas}{16}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Definición de la relación de vueltas del transformador y el rango de tensión de entrada}{16}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Definición de los valores de inductancia de dispersión y magnetización del transformador}{16}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Definición de los valores de los capacitores}{17}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Simulación}{18}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Simulación ideal}{18}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Informes con \LaTeX }{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Una breve introducción}{19}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Añadiendo tablas}{19}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Aquí un nuevo tema}{20}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Haciendo informes como un profesional}{20}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Otros párrafos más normales}{21}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Ejemplos de inserción de código fuente}{22}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Agregando múltiples imágenes}{23}{subsection.6.4}%
+\contentsline {section}{Más ejemplos}{24}{section*.17}%
+\contentsline {subsection}{Listas y Enumeraciones}{24}{section*.17}%
+\contentsline {subsection}{Otros}{24}{Item.19}%
+\contentsline {section}{Referencias}{25}{Item.19}%
+\contentsline {section}{Anexo \numberline {A}Cálculos realizados}{25}{appendix.1.Alph1}%
+\contentsline {subsection}{\numberline {A.1}Metodología}{25}{subsection.1.Alph1.1}%
+\contentsline {subsection}{\numberline {A.2}Resultados}{26}{subsection.1.Alph1.2}%

@@ -53,9 +53,9 @@ Plecs {
   ScriptsDialogGeometry ""
   ScriptsDialogSplitterPos "0"
   Schematic {
-    Location      [0, 53; 1440, 794]
+    Location      [-96, -1027; 1824, -27]
     ZoomFactor    1.49863
-    SliderPosition [0, 30]
+    SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -451,7 +451,7 @@ Plecs {
       LabelPosition west
       Parameter {
         Variable      "C"
-        Value         "100e-6"
+        Value         "10e-6"
         Show          off
       }
       Parameter {
@@ -470,7 +470,7 @@ Plecs {
       LabelPosition west
       Parameter {
         Variable      "C"
-        Value         "100e-6"
+        Value         "10e-6"
         Show          off
       }
       Parameter {

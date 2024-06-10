@@ -1,0 +1,15 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {figure}{\numberline {2}{\ignorespaces Formas de onda para \( d \leq 0.5 \): (a) Señales de encendido \( S_U \) y \( S_L \). (b) \( i_p \), \( \overline {i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( i_s \), \( i_{DRL} \) e \( i_{DRU} \).}}{4}{figure.caption.3}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Modos de operación del convertidor.}}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {4}{\ignorespaces \relax }}{9}{figure.caption.5}%
+\contentsline {figure}{\numberline {5}{\ignorespaces (a) $d \ vs. \ V_{in(pu)}$ y (b) $V_{bus(pu)} \ vs. \ V_{in(pu)}$; para $V'_{o(pu)}=1$ parametrizada en $I'_{o(pu)}$.}}{10}{figure.caption.6}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Ganancias del convertidor en función del ciclo de trabajo $d$ y de la corriente de salida $I'_{o(pu)}$.}}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Curvas para \( t_D > t_z \): (a) Señales de encendido $S_U$ y $S_L$. (b) \( i_p \), \( \bar {i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( v_{SL} \) y \( v_{SU} \).}}{12}{figure.caption.8}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Forma de onda de las corrientes $i_P$ e $i_m$ para: (a) $i_m(t_3)>0$ y (b) $i_m(t_3)<0$.}}{13}{figure.caption.9}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Señales de encendido de $S_L$ y $S_U$, corriente $i_{SU}$ y tensiones $v_{SU}$ para distintos casos de valores de capacitancia de snubber.}}{14}{figure.caption.10}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Energía $Q$ utilizada para el dimensionamiento de los capcaitores de snubber.}}{14}{figure.caption.11}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Circuito esquemático en PLECS.}}{18}{figure.caption.12}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Título de la imagen en el índice.}}{19}{figure.caption.13}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Apolo flotando a la izquierda. }}{20}{figure.caption.15}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Ejemplo de imagen múltiple.}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Imagen en anexo. }}{25}{figure.caption.19}%
