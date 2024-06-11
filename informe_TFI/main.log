@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  9 JUN 2024 22:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.27)  11 JUN 2024 08:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2510,11 +2510,15 @@ LaTeX Info: Redefining \% on input line 37.
  (./main.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-)
+LaTeX Info: Redefining \. on input line 21.
+LaTeX Info: Redefining \% on input line 21.
+ [3{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/l
+ocal/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}])
 \tf@lof=\write4
 \openout4 = `main.lof'.
 
- (./main.lot
+
+(./main.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
@@ -2527,9 +2531,8 @@ LaTeX Info: Redefining \% on input line 1.
 
 LaTeX Info: Redefining \. on input line 72.
 LaTeX Info: Redefining \% on input line 72.
- [3{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/l
-ocal/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [4] (./example.tex
-<img/topologiaReferencia.png, id=174, 1630.09pt x 685.56125pt>
+ [4] (./example.tex
+<img/topologiaReferencia.png, id=199, 1630.09pt x 685.56125pt>
 File: img/topologiaReferencia.png Graphic file (type png)
 <use img/topologiaReferencia.png>
 Package pdftex.def Info: img/topologiaReferencia.png  used on input line 39.
@@ -2555,7 +2558,7 @@ LaTeX Info: Redefining \% on input line 81.
  [3
 
 ]
-<img/formaOnda1.png, id=195, 703.62875pt x 768.8725pt>
+<img/formaOnda1.png, id=219, 703.62875pt x 768.8725pt>
 File: img/formaOnda1.png Graphic file (type png)
 <use img/formaOnda1.png>
 Package pdftex.def Info: img/formaOnda1.png  used on input line 89.
@@ -2571,7 +2574,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Info: Redefining \. on input line 97.
 LaTeX Info: Redefining \% on input line 97.
  [4 <./img/formaOnda1.png>]
-<img/modosOperacion.png, id=211, 523.9575pt x 834.11626pt>
+<img/modosOperacion.png, id=235, 523.9575pt x 834.11626pt>
 File: img/modosOperacion.png Graphic file (type png)
 <use img/modosOperacion.png>
 Package pdftex.def Info: img/modosOperacion.png  used on input line 113.
@@ -2586,7 +2589,7 @@ LaTeX Info: Redefining \. on input line 145.
 LaTeX Info: Redefining \% on input line 145.
 
 [7{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-<img/corrienteEstacionario.png, id=234, 1213.53375pt x 620.3175pt>
+<img/corrienteEstacionario.png, id=258, 1213.53375pt x 620.3175pt>
 File: img/corrienteEstacionario.png Graphic file (type png)
 <use img/corrienteEstacionario.png>
 Package pdftex.def Info: img/corrienteEstacionario.png  used on input line 167.
@@ -2599,12 +2602,12 @@ LaTeX Info: Redefining \% on input line 171.
 LaTeX Info: Redefining \. on input line 209.
 LaTeX Info: Redefining \% on input line 209.
  [9 <./img/corrienteEstacionario.png>]
-<img/eqV.png, id=249, 952.55875pt x 834.11626pt>
+<img/eqV.png, id=273, 952.55875pt x 834.11626pt>
 File: img/eqV.png Graphic file (type png)
 <use img/eqV.png>
 Package pdftex.def Info: img/eqV.png  used on input line 215.
 (pdftex.def)             Requested size: 422.77698pt x 370.20691pt.
-<img/eqI.png, id=250, 957.5775pt x 834.11626pt>
+<img/eqI.png, id=274, 957.5775pt x 834.11626pt>
 File: img/eqI.png Graphic file (type png)
 <use img/eqI.png>
 Package pdftex.def Info: img/eqI.png  used on input line 222.
@@ -2648,7 +2651,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 LaTeX Info: Redefining \. on input line 239.
 LaTeX Info: Redefining \% on input line 239.
 [11 <./img/eqI.png>]
-<img/suave1.png, id=264, 845.1575pt x 888.31876pt>
+<img/suave1.png, id=288, 845.1575pt x 888.31876pt>
 File: img/suave1.png Graphic file (type png)
 <use img/suave1.png>
 Package pdftex.def Info: img/suave1.png  used on input line 242.
@@ -2666,7 +2669,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 247.
 
-<img/tD.png, id=265, 845.1575pt x 804.00375pt>
+<img/tD.png, id=289, 845.1575pt x 804.00375pt>
 File: img/tD.png Graphic file (type png)
 <use img/tD.png>
 Package pdftex.def Info: img/tD.png  used on input line 253.
@@ -2686,7 +2689,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 260.
 
-<img/capSnubber.png, id=272, 765.86125pt x 614.295pt>
+<img/capSnubber.png, id=296, 765.86125pt x 614.295pt>
 File: img/capSnubber.png Graphic file (type png)
 <use img/capSnubber.png>
 Package pdftex.def Info: img/capSnubber.png  used on input line 266.
@@ -2706,7 +2709,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 273.
 
-<img/energiaQ.png, id=279, 843.15pt x 576.1525pt>
+<img/energiaQ.png, id=303, 843.15pt x 576.1525pt>
 File: img/energiaQ.png Graphic file (type png)
 <use img/energiaQ.png>
 Package pdftex.def Info: img/energiaQ.png  used on input line 277.
@@ -2722,60 +2725,111 @@ LaTeX Info: Redefining \% on input line 336.
  [16
 
 ]
-LaTeX Info: Redefining \. on input line 351.
-LaTeX Info: Redefining \% on input line 351.
+LaTeX Info: Redefining \. on input line 356.
+LaTeX Info: Redefining \% on input line 356.
  [17]
-<../schematic.pdf, id=305, 414.54875pt x 263.98625pt>
-File: ../schematic.pdf Graphic file (type pdf)
-<use ../schematic.pdf>
-Package pdftex.def Info: ../schematic.pdf  used on input line 362.
-(pdftex.def)             Requested size: 469.75539pt x 299.15091pt.
-LaTeX Info: Redefining \. on input line 385.
-LaTeX Info: Redefining \% on input line 385.
+<../schematic_mod.pdf, id=329, 378.41376pt x 188.705pt>
+File: ../schematic_mod.pdf Graphic file (type pdf)
+<use ../schematic_mod.pdf>
+Package pdftex.def Info: ../schematic_mod.pdf  used on input line 369.
+(pdftex.def)             Requested size: 375.80574pt x 187.40591pt.
+LaTeX Info: Redefining \. on input line 390.
+LaTeX Info: Redefining \% on input line 390.
  [18
 
- <../schematic.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <20.73596> on input line 38
-7.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <20.73596> on input line 387.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.5151> on input line 387.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.36798> on input line 387.
-LaTeX Font Info:    Calculating math sizes for size <10.00012> on input line 39
+ <../schematic_mod.pdf>]
+<../ripple.pdf, id=351, 722.7pt x 361.35pt>
+File: ../ripple.pdf Graphic file (type pdf)
+<use ../ripple.pdf>
+Package pdftex.def Info: ../ripple.pdf  used on input line 405.
+(pdftex.def)             Requested size: 469.75539pt x 234.88023pt.
+LaTeX Info: Redefining \. on input line 411.
+LaTeX Info: Redefining \% on input line 411.
+ [19 <../ripple.pdf>]
+<../disparo.pdf, id=392, 722.7pt x 361.35pt>
+File: ../disparo.pdf Graphic file (type pdf)
+<use ../disparo.pdf>
+Package pdftex.def Info: ../disparo.pdf  used on input line 428.
+(pdftex.def)             Requested size: 469.75539pt x 234.88023pt.
+LaTeX Info: Redefining \. on input line 434.
+LaTeX Info: Redefining \% on input line 434.
+ [20 <../disparo.pdf>]
+<../tensiones_transformador.pdf, id=444, 722.7pt x 722.7pt>
+File: ../tensiones_transformador.pdf Graphic file (type pdf)
+<use ../tensiones_transformador.pdf>
+Package pdftex.def Info: ../tensiones_transformador.pdf  used on input line 441
+.
+(pdftex.def)             Requested size: 469.75539pt x 469.76045pt.
+<../corrientes_transformador.pdf, id=445, 722.7pt x 722.7pt>
+File: ../corrientes_transformador.pdf Graphic file (type pdf)
+<use ../corrientes_transformador.pdf>
+Package pdftex.def Info: ../corrientes_transformador.pdf  used on input line 45
+1.
+(pdftex.def)             Requested size: 469.75539pt x 469.76045pt.
+LaTeX Info: Redefining \. on input line 455.
+LaTeX Info: Redefining \% on input line 455.
+ [21 <../tensiones_transformador.pdf>]
+<../salida_40.pdf, id=489, 722.7pt x 722.7pt>
+File: ../salida_40.pdf Graphic file (type pdf)
+<use ../salida_40.pdf>
+Package pdftex.def Info: ../salida_40.pdf  used on input line 465.
+(pdftex.def)             Requested size: 469.75539pt x 469.76045pt.
+LaTeX Info: Redefining \. on input line 469.
+LaTeX Info: Redefining \% on input line 469.
+ [22 <../corrientes_transformador.pdf>]
+<../salida_resistencia.pdf, id=534, 722.7pt x 722.7pt>
+File: ../salida_resistencia.pdf Graphic file (type pdf)
+<use ../salida_resistencia.pdf>
+Package pdftex.def Info: ../salida_resistencia.pdf  used on input line 476.
+(pdftex.def)             Requested size: 469.75539pt x 469.76045pt.
+LaTeX Info: Redefining \. on input line 480.
+LaTeX Info: Redefining \% on input line 480.
+ [23 <../salida_40.pdf>]
+LaTeX Info: Redefining \. on input line 494.
+LaTeX Info: Redefining \% on input line 494.
+
+[24 <../salida_resistencia.pdf>]
+LaTeX Font Info:    Calculating math sizes for size <20.73596> on input line 49
 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.00012> on input line 396.
+(Font)              <20.73596> on input line 496.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.00005> on input line 396.
+(Font)              <14.5151> on input line 496.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5.00006> on input line 396.
-<./img//ejemplos/test-image.png, id=326, 1284.8pt x 722.7pt>
+(Font)              <10.36798> on input line 496.
+LaTeX Font Info:    Calculating math sizes for size <10.00012> on input line 50
+5.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.00012> on input line 505.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7.00005> on input line 505.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5.00006> on input line 505.
+<./img//ejemplos/test-image.png, id=632, 1284.8pt x 722.7pt>
 File: ./img//ejemplos/test-image.png Graphic file (type png)
 <use ./img//ejemplos/test-image.png>
-Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 409
+Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 518
 .
 (pdftex.def)             Requested size: 154.16934pt x 86.72025pt.
-LaTeX Info: Redefining \. on input line 447.
-LaTeX Info: Redefining \% on input line 447.
- [19
+LaTeX Info: Redefining \. on input line 556.
+LaTeX Info: Redefining \% on input line 556.
+ [25
 
  <./img//ejemplos/test-image.png>]
-<./img//ejemplos/test-image-wrap.jpg, id=350, 301.125pt x 301.125pt>
+<./img//ejemplos/test-image-wrap.jpg, id=656, 301.125pt x 301.125pt>
 File: ./img//ejemplos/test-image-wrap.jpg Graphic file (type jpg)
 <use ./img//ejemplos/test-image-wrap.jpg>
 Package pdftex.def Info: ./img//ejemplos/test-image-wrap.jpg  used on input lin
-e 459.
+e 568.
 (pdftex.def)             Requested size: 140.92804pt x 140.93144pt.
-LaTeX Info: Redefining \. on input line 482.
-LaTeX Info: Redefining \% on input line 482.
- [20
+LaTeX Info: Redefining \. on input line 591.
+LaTeX Info: Redefining \% on input line 591.
+ [26
 
  <./img//ejemplos/test-image-wrap.jpg>]
-LaTeX Info: Redefining \. on input line 516.
-LaTeX Info: Redefining \% on input line 516.
- [21]
+LaTeX Info: Redefining \. on input line 625.
+LaTeX Info: Redefining \% on input line 625.
+ [27]
 (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 )
@@ -2788,9 +2842,9 @@ File: lstlang1.sty 2024/02/21 1.10 listings language file
 (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 )
-LaTeX Info: Redefining \. on input line 554.
-LaTeX Info: Redefining \% on input line 554.
- [22]
+LaTeX Info: Redefining \. on input line 663.
+LaTeX Info: Redefining \% on input line 663.
+ [28]
 (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 )
@@ -2823,49 +2877,44 @@ File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
 )
 File: ./img//ejemplos/test-image.png Graphic file (type png)
 <use ./img//ejemplos/test-image.png>
-Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 570
+Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 679
 .
 (pdftex.def)             Requested size: 184.9429pt x 104.0224pt.
 File: ./img//ejemplos/test-image-wrap.jpg Graphic file (type jpg)
 <use ./img//ejemplos/test-image-wrap.jpg>
 Package pdftex.def Info: ./img//ejemplos/test-image-wrap.jpg  used on input lin
-e 571.
+e 680.
 (pdftex.def)             Requested size: 142.26378pt x 142.26852pt.
 File: ./img//ejemplos/test-image.png Graphic file (type png)
 <use ./img//ejemplos/test-image.png>
-Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 573
+Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 682
 .
 (pdftex.def)             Requested size: 341.43306pt x 192.05493pt.
-LaTeX Info: Redefining \. on input line 581.
-LaTeX Info: Redefining \% on input line 581.
- [23]
-LaTeX Info: Redefining \. on input line 648.
-LaTeX Info: Redefining \% on input line 648.
+LaTeX Info: Redefining \. on input line 690.
+LaTeX Info: Redefining \% on input line 690.
+ [29]
+LaTeX Info: Redefining \. on input line 757.
+LaTeX Info: Redefining \% on input line 757.
 
-[24
+[30
 
 ] (./main.bbl)
 File: ./img//ejemplos/test-image.png Graphic file (type png)
 <use ./img//ejemplos/test-image.png>
-Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 665
+Package pdftex.def Info: ./img//ejemplos/test-image.png  used on input line 774
 .
 (pdftex.def)             Requested size: 244.11453pt x 137.31442pt.
-LaTeX Info: Redefining \. on input line 667.
-LaTeX Info: Redefining \% on input line 667.
-
-(/usr/local/texlive/2024/texmf-dist/tex/generic/stringenc/se-utf8.def
-File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [25
+LaTeX Info: Redefining \. on input line 776.
+LaTeX Info: Redefining \% on input line 776.
+ [31
 
 ])
 LaTeX Info: Redefining \. on input line 79.
 LaTeX Info: Redefining \% on input line 79.
 
-[26]
-
-LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (30 not 31).
-               Rerun to correct this.
-
+(/usr/local/texlive/2024/texmf-dist/tex/generic/stringenc/se-utf8.def
+File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
+) [32]
 (./main.aux
 LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
@@ -2876,13 +2925,13 @@ L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 36156 strings out of 474116
- 592489 string characters out of 5743682
+ 36248 strings out of 474116
+ 594606 string characters out of 5743682
  2084187 words of memory out of 5000000
- 57679 multiletter control sequences out of 15000+600000
+ 57745 multiletter control sequences out of 15000+600000
  716900 words of font info for 224 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 113i,19n,153p,17364b,2606s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,19n,153p,17364b,2622s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line
 10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></u
 sr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/te
@@ -2901,10 +2950,10 @@ fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/l
 ocal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texliv
 e/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texm
 f-dist/fonts/type1/public/lm/lmvtt10.pfb>
-Output written on main.pdf (31 pages, 1691580 bytes).
+Output written on main.pdf (37 pages, 1928102 bytes).
 PDF statistics:
- 811 PDF objects out of 1000 (max. 8388607)
- 697 compressed objects within 7 object streams
- 161 named destinations out of 1000 (max. 500000)
- 427 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1144 PDF objects out of 1200 (max. 8388607)
+ 818 compressed objects within 9 object streams
+ 187 named destinations out of 1000 (max. 500000)
+ 505 words of extra memory for PDF output out of 10000 (max. 10000000)
 

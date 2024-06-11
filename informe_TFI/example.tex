@@ -348,6 +348,11 @@ Se define un valor alto para el capacitor $C_L=100 \ \mu F$ para poder mitigar e
 Ahora, para obtener el valor de los capacitores de salida, se ajustará el valor por simulación, el valor final se verá reflejado en la explicación del siguiente apartado.
 
 
+\subsection{Inductor de entrada}
+
+Por efectos de la topología, en este caso no es necesario utilizar un inductor de entrada de valor elevado o si quiera colocarlo, se opta por en este caso utilizar un inductor de $1 \ mH$.
+
+
 \clearpage
 
 
@@ -355,19 +360,123 @@ Ahora, para obtener el valor de los capacitores de salida, se ajustará el valor
 
 \subsection{Simulación ideal}
 
+\subsubsection{Circuito implementado}
+
 Para una simulación con componentes ideales, se trabaja con el software de simulación PLECS, en su versión 4.8 (corriendo en sistema operativo MacOS). Se parte del siguiente esquemático a implementar. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../schematic}
+	\includegraphics[width=0.8\linewidth]{../schematic_mod}
 	\caption{Circuito esquemático en PLECS.}
 	\label{fig:schematic}
 \end{figure}
 
+Puede verse algunos cambios en el circuito de alimentación, se mencionan a continuación:
+
+\begin{enumerate}
+	\item Se modifica el punto de conexión de la tensión de entrada, se utiliza la parte superior al capacitor $C_U$. 
+	\item Se modifican los terminales de conexión del devanado primario del transformador.
+	\item Se agrega un diodo volante a la inductancia $L_{in}$.
+	\item Resistores en serie con los capacitores del sistema.
+	\item Eliminación de las inductancias parásistas del transformador.
+	\item Eliminación de los capacitores de de snubber.
+\end{enumerate}
+
+Los primeros 2 cambios van de la mano. Esa modificación a la topología se hizo para lograr el funcionamiento de la simulación de acuerdo con el diseño planteado a partir de la bibliografía. En este caso, cabe resaltar que se tiene la siguiente secuencia de funcionamiento en el devanado primario.
+
+\begin{enumerate}
+	\item Al cerrarse $S_U$, la corriente circula entrante por el terminal superior del devanado primario del transformador, y, al circular la corriente luego por $C_U$, éste se carga.
+	\item Al conmutar, cerrándose $S_L$, el capacitor $C_L$ aporta la tensión a la que se cargó en el ciclo anterior, brindando así una corriente de entrada por el borne inferior del devanado primario del transformador.
+\end{enumerate}
+
+Se logra de esa forma la circulación de una tensión alternada, fundamental para el uso del transformador, que se encarga de transmitir tensiones alternadas entre devanados. En este caso se usa el efecto transformador para elevar la tensión y obtener una salida de mayor nivel de tensión.
+
+El diodo volante conectado al inductor $L_{in}$ sirve para proteger el circuito de entrada de una realimentación negativa a la fuente en el caso de que se encuentre operando el circuito sin carga, ya que prácticamente se está teniendo una carga RL.
+
+Los resistores en serie con cada uno de los capacitores se usan a modo de protección contra saltos discretos de los valores de tensión o corriente en los capacitores. Esto es por la forma en que el simulador PLECS interpreta los modelos, en la página web del software recomiendan una resistencia de pequeño valor en serie para poder mitigar estos efectos. Para todos los casos se usan resistores de $1 \ m\Omega$.
 
 
+\subsubsection{Ajuste de capacitores}
+
+Se realiza un barrido por sobre los capacitores de salida, colocando a ambos del mismo valor. En este barrido se busca medir el ripple por sobre la forma de onda de la tensión. Se toma como referencia la disponibilidad de capacitores de la marca Advance Capacitors, en donde se tiene disponibilidad de capacitores en el rango $5 \ \mu F - 1600 \ \mu F$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../ripple}
+	\caption{Variación del ripple con la capacitancia.}
+	\label{fig:ripple}
+\end{figure}
+
+Puede verse en la figura anterior, cómo claramente el riple disminuye con el aumento de la capacitancia, sin embargo, para valores a partir de $400 \ \mu F$, no disminuye el error prácticamente, por lo que se toma ese como valor final para el diseño, evitando sobredimensionar.
+
+Finalmente, por el hecho de la modificación de la red de alimentación no es necesaria la aplicación de capacitores de Snubber, ya que estos se encuentran directamente relacionados con el hecho de que se busca una tensión completamente positiva en el devanado primario. La topología adoptada permite excursionar de forma negativa y positiva en el transformador, lo que hace que el uso de los mismos no tiene sentido práctico ya.
+
+\subsubsection{Señales de disparo de los IGBT}
+
+Se utiliza como referencia, el tiempo muerto de la bilbiografía, que es de $0.48 \ \mu s$, para ello, se parte de un ciclo de trabajo de $d=0.5$, lo que implica que se tiene una señal de disparo para $S_L$ con ese duty cycle y sin delay de fase. Ahora, para el disparo del IGBT inferior, se calcula:
+
+$$d_{SL} = 0.5 - \frac{2\cdot 0.48 \mu s}{20 \ \mu s}=0.452$$
+
+Y, para el delay:
+
+$$t_{SL}=(1-d_{SL})\cdot 20 \ \mu s - 0.48 \ \mu s= 10.48 \ \mu s$$
+
+Se muestran a continuación las formas de onda de las señales de disparo de cada uno de los IGBT. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../disparo}
+	\caption{Señales de disparo de los generadores de pulso.}
+	\label{fig:disparo}
+\end{figure}
+
+Para este caso ideal, la tensión utilizada para disparar a los transistores es de $10 \ V$. Se puede apreciar la diferencia entre los ciclos de trabajo de cada uno de los trenes de pulso, sin embargo son similares.
+
+\subsubsection{Formas de onda en el transformador}
+
+En cuanto al transformador, se tienen las siguientes formas de onda para las tensiones.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../tensiones_transformador}
+	\caption{Tensiones en los devanados del transformador.}
+	\label{fig:tensionestransformador}
+\end{figure}
 
 
+Ahora, para las corrientes, las formas de onda son las siguientes.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../corrientes_transformador}
+	\caption{Corrientes en los devanados del transformador.}
+	\label{fig:corrientestransformador}
+\end{figure}
+
+Pueden apreciarse algunos sobrepicos de corriente, sin embargo el filtro de salida compuesto por el rectificador, así como los capacitores se encargan de no permitir el paso de esos transistorios de la conmutación a la carga.
+
+
+\subsubsection{Formas de onda de la señal de salida}
+
+Finalmente, las formas de onda más importantes, la salida. En este caso, se toma como referencia una resistencia de $40 \ \Omega$, lo que implica que se está entregando la máxima corriente de diseño para un único convertidor.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../salida_40}
+	\caption{Formas de onda a la salida del transformador.}
+	\label{fig:salida40}
+\end{figure}
+
+Se puede apreciar que no se tienen exactamente los valores medios deseados de $400 \ V$ y $10 \ A$. Esto es por el sobredimensionamiento que se le realizó al transformador para contemplar las pérdidas de los componentes y por el hecho de que la simulación en PLECS no contempla esas no idealidades. Sin embargo, posteriormente en la simulación de un circuito real se podrá apreciar un valor mucho más similar al de diseño.
+
+Ahora, se analiza la regulación del circuito, para ello, se realizará un barrido en la resistencia de salida, de valores entre $40 \ \Omega - 40000 \ \Omega$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../salida_resistencia}
+	\caption{}
+	\label{fig:salidaresistencia}
+\end{figure}
 
 
 
