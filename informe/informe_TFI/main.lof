@@ -1,21 +1,26 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {figure}{\numberline {2}{\ignorespaces Formas de onda para \( d \leq 0.5 \): (a) Señales de encendido \( S_U \) y \( S_L \). (b) \( i_p \), \( \overline {i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( i_s \), \( i_{DRL} \) e \( i_{DRU} \).}}{4}{figure.caption.3}%
 \contentsline {figure}{\numberline {3}{\ignorespaces Modos de operación del convertidor.}}{6}{figure.caption.4}%
-\contentsline {figure}{\numberline {4}{\ignorespaces \relax }}{9}{figure.caption.5}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Corrientes del circuito en estado estacionario.}}{9}{figure.caption.5}%
 \contentsline {figure}{\numberline {5}{\ignorespaces (a) $d \ vs. \ V_{in(pu)}$ y (b) $V_{bus(pu)} \ vs. \ V_{in(pu)}$; para $V'_{o(pu)}=1$ parametrizada en $I'_{o(pu)}$.}}{10}{figure.caption.6}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Ganancias del convertidor en función del ciclo de trabajo $d$ y de la corriente de salida $I'_{o(pu)}$.}}{11}{figure.caption.7}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Curvas para \( t_D > t_z \): (a) Señales de encendido $S_U$ y $S_L$. (b) \( i_p \), \( \bar {i}_p \) e \( i_m \). (c) \( i_{SL} \) e \( i_{SU} \). (d) \( v_{SL} \) y \( v_{SU} \).}}{12}{figure.caption.8}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Forma de onda de las corrientes $i_P$ e $i_m$ para: (a) $i_m(t_3)>0$ y (b) $i_m(t_3)<0$.}}{13}{figure.caption.9}%
 \contentsline {figure}{\numberline {9}{\ignorespaces Señales de encendido de $S_L$ y $S_U$, corriente $i_{SU}$ y tensiones $v_{SU}$ para distintos casos de valores de capacitancia de snubber.}}{14}{figure.caption.10}%
 \contentsline {figure}{\numberline {10}{\ignorespaces Energía $Q$ utilizada para el dimensionamiento de los capcaitores de snubber.}}{14}{figure.caption.11}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Circuito esquemático en PLECS.}}{18}{figure.caption.12}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Variación del ripple con la capacitancia.}}{19}{figure.caption.13}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Señales de disparo de los generadores de pulso.}}{20}{figure.caption.14}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Tensiones en los devanados del transformador.}}{21}{figure.caption.15}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Corrientes en los devanados del transformador.}}{22}{figure.caption.16}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Formas de onda a la salida del transformador.}}{23}{figure.caption.17}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Curva de regulación de tensión de salida del convertidor DC-DC diseñado.}}{24}{figure.caption.18}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Título de la imagen en el índice.}}{25}{figure.caption.19}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Apolo flotando a la izquierda. }}{26}{figure.caption.21}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Ejemplo de imagen múltiple.}}{29}{figure.caption.22}%
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Imagen en anexo. }}{31}{figure.caption.25}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Esquema general de un único conversor.}}{17}{figure.caption.13}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Esquema de conexión final.}}{18}{figure.caption.14}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Esquemático del circuito implementado en PLECS.}}{21}{figure.caption.15}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Señales de disparo de los IGBT.}}{22}{figure.caption.16}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Señales de salida para máxima carga.}}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Transitorio de la señal de salida.}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Potencia de salida para máxima carga.}}{24}{figure.caption.19}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Señales de tensión y corriente en los IGBT implementados.}}{25}{figure.caption.20}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Tensiones en los devanados del transformador.}}{26}{figure.caption.21}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Corrientes en los devanados del transformador.}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Corriente en el diodo de snubber}}{30}{figure.caption.24}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Señales en el diodo de salida.}}{31}{figure.caption.26}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Título de la imagen en el índice.}}{33}{figure.caption.28}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Apolo flotando a la izquierda. }}{34}{figure.caption.30}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Ejemplo de imagen múltiple.}}{37}{figure.caption.31}%
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Imagen en anexo. }}{39}{figure.caption.34}%

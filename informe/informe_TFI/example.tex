@@ -1,21 +1,3 @@
-% Template:     Informe LaTeX
-% Documento:    Archivo de ejemplo
-% Versión:      8.3.5 (12/04/2024)
-% Codificación: UTF-8
-%
-% Autor: Pablo Pizarro R.
-%        pablo@ppizarror.com
-%
-% Manual template: [https://latex.ppizarror.com/informe]
-% Licencia MIT:    [https://opensource.org/licenses/MIT]
-
-% ------------------------------------------------------------------------------
-% NUEVA SECCIÓN
-% ------------------------------------------------------------------------------
-% Las secciones se inician con \section, si se quiere una sección sin número se
-% pueden usar las funciones \sectionanum (sección sin número) o la función
-% \sectionanumnoi para crear el mismo título sin numerar y sin aparecer en el índice
-
 \section{Inicio}
 
 \subsection{Introducción}
@@ -165,7 +147,7 @@ Se tiene la siguiente \hyperref[fig:corrienteestacionario]{característica de la
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/corrienteEstacionario}
-	\caption{}
+	\caption{Corrientes del circuito en estado estacionario.}
 	\label{fig:corrienteestacionario}
 \end{figure}
 
@@ -287,70 +269,203 @@ Para calcular el valor máximo que pueden tener los capacitores de snubber $C_r$
 
 \section{Diseño del convertidor}
 
-\subsection{Características deseadas}
+\subsection{Puntos de partida}
 
-Se parte del hecho de que cada panel solar tiene una potencia de aproximadamente $5 \ kWp$. Luego, con el fin de no sobredimensionar componentes tales como el transformador y cada componente del convertidor, se decide por utilizar 4 convertidores DC-DC en paralelo, de forma que aporten cada uno aproximadamente $1/4$ de la corriente de salida solicitada por medio de los requisitos de diseño. 
-
-Se define como máxima tensión de entrada $288 \ V$, la frecuencia de conmutación será de $f_s=50 \ kHz$. El diseño de cada convertidor será de $4 \ kW$Se definen además:
+De las especificaciones de diseño, dadas en la consigna del desarrollo a realizar, se tiene en cuenta lo siguiente:
 
 \begin{itemize}
-	\item $V'_{oB}=n \ 400 \ V$
-	\item $I'_{oB}= \frac{P_n}{nV_o}=\frac{10}{n} \ A$
+	\item Se pueden conectar paneles solares en paralelo de forma de tener una mayor corriente de entrada.
+	\item El uso de paneles solares en paralelo asegura continuidad del servicio ante fallas individuales de los mismos.
+	\item Para lograr la salida deseada, es posible implementar convertidores en paralelo.
 \end{itemize}
 
-\subsection{Definición de la relación de vueltas del transformador y el rango de tensión de entrada}
 
-Para trabajar en conmutación suave, es conveniente trabajar con:
+Las especificaciones de potencia de paneles solares, o campos fotovoltaicos viene dada en la unidad kWp, que refiere a la potencia de salida para las condiciones estándar de prueba (\textbf{STC}: \textit{Standard Test Conditions}), que son:
 
-$$
-0.42 < V_{in(pu)} < 0.9
-$$
+\begin{itemize}
+	\item Irradiancia de $1000 \ W/m^2$.
+	\item Temperatura de cédula de 25 grados centígrados.
+	\item Masa de aire de 1.5.
+\end{itemize}
 
-Por lo que se limita $V_{in(pu)} < 0.9$. Ahora, si se reemplaza, se tiene:
+Se toman entonces, como referencia, paneles solares de $550 \ W$, en este caso de la marca Panasonic, más precisamente de la línea Anchor, el modelo es AE14HXXXVHC10B, del cual se tienen las siguientes características:
 
-$$
-n>\frac{V_{in(max)}}{0.9V_{oB}}
-$$
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		\textbf{STC} & \textbf{550W} & \textbf{545W} & \textbf{540W} & \textbf{535W} & \textbf{530W} \\ \hline
+		\textbf{Wattage, Wp} & 550W & 545W & 540W & 535W & 530W \\ \hline
+		\textbf{Voltage at Max Power, Vmax} & 42.05V & 41.87V & 41.75V & 41.57V & 41.39V \\ \hline
+		\textbf{Open Circuit Voltage, Voc} & 49.88V & 49.69V & 49.54V & 49.39V & 49.24V \\ \hline
+		\textbf{Current at Max Power, Imax} & 13.08A & 13.02A & 12.94A & 12.87A & 12.81A \\ \hline
+		\textbf{Short Circuit Current, Isc} & 14.01A & 13.96A & 13.89A & 13.83A & 13.76A \\ \hline
+		\textbf{Module Efficiency} & 21.3\% & 21.1\% & 20.9\% & 20.7\% & 20.5\% \\ \hline
+		\textbf{Operating Temperature (°C)} & \multicolumn{5}{c|}{-40°C ~ +85°C} \\ \hline
+		\textbf{Maximum System Voltage} & \multicolumn{5}{c|}{1500 V DC (IEC)} \\ \hline
+		\textbf{Maximum Series Fuse Rating} & \multicolumn{5}{c|}{25 A} \\ \hline
+		\textbf{Power Tolerance} & \multicolumn{5}{c|}{0 to +5 Wp} \\ \hline
+	\end{tabular}
+	\caption{Especificaciones técnicas del módulo AE14HxxxVHC10B}
+	\label{tab:module_specs}
+\end{table}
 
-
-Se decide por utilizar como tensión de alimentación $144 \ V$, equivalente a 3 paneles solares en serie. De esa forma, despreciando la caída de tensión en los diodos a la salida, así como la tensión de saturación de los IGBT de la entrada, se obtiene:
-
-$$
-n=\frac{400 \ V}{144 \ V} \approx 2.78
-$$
-
-Ahora, para contemplar las caídas de tensión de los componentes reales, se utilizará un margen de $5 \%$, logrando $n=2.91$.
-
-\subsection{Definición de los valores de inductancia de dispersión y magnetización del transformador}
-
-La impedancia base del convertidor a implementar viene dada por:
-
-$$
-R_B = \frac{V'_{oB}}{I'_{oB}}=\frac{137.45 \ V}{29.1 \ A}=4.72 \ \Omega
-$$
-
-El período de conmutación es $T_B=20 \ \mu s$, por lo que:
-
-$$
-L_{mp}=\frac{R_B T_B}{2 \pi}=15.02 \ \mu H
-$$
-
-Y finalmente:
+Puede verse cómo para el módulo de $550 \ W$, se tiene una salida de tensión de alimentación máxima de $42.05 \ V$, y a circuito abierto de $49.88 \ V$. Se tomará como referencia, con el fin de cumplir los objetivos de diseño de la consigna como si el dato de $V_{max}$ fuera $48 \ V$, y se ajusta la corriente máxima a la potencia:
 
 $$
-L_{LKp} = 0.1 \ L_{mp} = 1.5 \ \mu H
+I_{max} = \frac{550W}{48V}= 11.45A
 $$
 
-\subsection{Definición de los valores de los capacitores}
+Ahora, hay ciertos aspectos a tener en cuenta, a priori, usando el dato de la consigna, de la potencia del campo fotovoltaico a implementar, se encuentra que en su totalidad, el mismo puede brindar una corriente de aproximadamente:
 
-Se define un valor alto para el capacitor $C_L=100 \ \mu F$ para poder mitigar el ripple de la tensión de entrada. Y, para el otro capacitor, se tiene $C_U=22 \ \mu F$, suavizando así el ripple de $v_{bus}$ y no volviendo muy lenta la dinámica del sistema. 
+$$
+I_{campo}=\frac{5000W}{48V}=104.66 A
+$$
 
-Ahora, para obtener el valor de los capacitores de salida, se ajustará el valor por simulación, el valor final se verá reflejado en la explicación del siguiente apartado.
+Si se toma un rendimiento ideal de $100 \ \%$, en donde las potencias de entrada y salida son exactamente iguales, se requiere una $P_{out}=400V\cdot 40A=16kWp$. Por lo que se ve que claramente no se cumple con el requerimiento de potencia. Por lo que, se toma como referencia un parque fotovoltaico de $22 \ kWp$, en donde se tendrían 40 paneles solares de los mencionados anteriormente. 
 
+Se decide que cada conversor a adoptar en paralelo aporte una corriente máxima de $4 \ A$, y, si se asume que cada conversor y panel solar son exactamente iguales (es decir, idealidad en la transmisión de potencia), entonces se deberían conectar 10 conversores en paralelo para lograr la salida deseada. Esto implicaría que cada conversor tiene una potencia de $1.6 \ kW$ en la salida, y, si se toma un margen de error por no idealidades y variaciones en la alimentación de los paneles (día de no mucha luz, por ejemplo), se tiene que aumentar la potencia de entrada. Se decide de esa forma por utilizar 4 paneles solares para cada conversor, totalizando de esa forma la necesidad de usar los 40 paneles disponibles en todo el campo. Cada conversor tiene la siguiente topología, de forma general.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/diagramaUnConversor}
+	\caption{Esquema general de un único conversor.}
+	\label{fig:diagramaunconversor}
+\end{figure}
+
+Y, de forma global, se estaría usando algo como lo siguiente.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/diagramaTotalConversores}
+	\caption{Esquema de conexión final.}
+	\label{fig:diagramatotalconversores}
+\end{figure}
+
+En este circuito convertidor por diseñar, no se utilizará una técnica de modulación de ZVS, por lo que no es necesario calcular un inductor $L_{LKp}$ para lograr el cruce por cero en un determinado instante. Esto es por la razón de que la alimentación de entrada es constante, y no será necesario aplicar variaciones en el ciclo de trabajo de las señales de disparo de las llaves $S_U$ y $S_L$.
+
+
+\subsection{Características deseadas}
+
+Se diseña cada conversor con las siguientes características:
+
+\begin{itemize}
+	\item $V_{in}=48V$
+	\item $P_{out}=1600W$
+	\item $V_{out}=400V$
+	\item $I_{out(max)}=4A$
+	\item $\eta =0.9$
+	\item $D=0.5$
+	\item $f_s=50kHz$
+\end{itemize}
+
+\subsection{Relación de transformación}
+
+Se parte del hecho de que:
+
+$$
+V_{out}=\frac{n\cdot V_{in}}{1-D}
+$$
+
+De donde se obtiene:
+
+$$
+n=\frac{V_{out}\cdot (1-D)}{V_{in}}=\frac{400V\cdot (1-0.5)}{48V}\approx 4.17
+$$
+
+Se eleva esa relación a $4.4$, con el fin de obtener un margen para pérdidas en los conductores, transformador, e incluso dispositivos como los diodos. Puede verse en la última expresión utilizada el funcionamiento del circuito doblador de tensión aplicado a la salida, resultante de la combinación de diodos y capacitores.
 
 \subsection{Inductor de entrada}
 
-Por efectos de la topología, en este caso no es necesario utilizar un inductor de entrada de valor elevado o si quiera colocarlo, se opta por en este caso utilizar un inductor de $1 \ mH$.
+Se parte de la potencia de entrada:
+
+$$
+P_{in}=\frac{1600W}{0.9}=1777.77W
+$$
+
+Entonces, la corriente de entrada será:
+
+$$
+I_{in} = \frac{P_{in}}{V_{in}}=\frac{1777.78W}{48V}=37.04A
+$$
+
+Asumiendo un ripple máximo de $20\%$, entonces se tiene:
+
+$$
+\Delta I_{in} = 0.2\cdot I_{in}=0.2\cdot 37.04 A = 7.41A
+$$
+
+Finalmente:
+
+$$
+L_{in}=\frac{V_{in}\cdot D}{f_s \cdot \Delta I_{in}}=\frac{48V\cdot 0.5}{50kHz\cdot 7.41A}=64.78 \mu H
+$$
+
+\subsection{Capacitores de entrada}
+
+Se parte de la expresión siguiente:
+
+$$
+\frac{\Delta V}{V}=\frac{D}{R \cdot C \cdot f_s}\Rightarrow C=\frac{D}{R \cdot f_s \cdot \frac{\Delta V}{V}}
+$$
+
+En donde:
+
+$$
+R=\frac{V_{CU}+V_{CL}}{P_{out}}=\frac{V_{in}^2}{P_{out}}=\frac{(48V)^2}{1600W}=1.44\Omega
+$$
+
+Si se fija un rippple de $2\%$, entonces se tiene:
+
+$$
+C=\frac{D}{R \cdot f_s \cdot \frac{\Delta V}{V}} = \frac{0.5}{1.44 \Omega \cdot 50kHz \cdot 0.02 }=347.2 \mu F
+$$
+
+Pero, como los capacitores están en serie:
+
+$$
+C_L=C_U=2C \approx 700 \mu F
+$$
+
+\subsection{Capacitores de filtro a la salida}
+
+Se usa la misma expresión que para la capacitancia de entrada:
+
+$$
+C=\frac{D}{R_{out} \cdot f_s \cdot \frac{\Delta V}{V}}
+$$
+
+En donde:
+
+$$
+R_{out}=\frac{V_{out}}{I_{out}}=\frac{400V}{4A}=100 \Omega
+$$
+
+Manteniendo constante la especificación de ripple de tensión:
+
+$$
+C=\frac{D}{R_{out} \cdot f_s \cdot \frac{\Delta V}{V}}=\frac{0.5}{100\Omega \cdot 50kHz \cdot 0.02}=5 \mu F
+$$
+
+Nuevamente, se tienen capacitores en serie, por lo que:
+
+$$
+C_{RU}=C_{RL}=10 \mu F
+$$
+
+\subsection{Ciclos de trabajo de las señales}
+
+Como fue mencionado anteriormente, se trabajará con un ciclo de trabajo de $0.5$. Este valor es aplicable al disparo de la llave $S_U$, sin embargo, para la llave $S_L$ es necesario que su $D$ sea menor a $0.5$, de modo de evitar problemas de cortocircuito. Se decide por utilizar un tiempo muerto de $0.5 \mu s$, lo que implica que la segunda llave debería estar encendida por un período de tiempo calculado como:
+
+$$
+t_{on(L)}=0.5\cdot T_s-2 \cdot 0.5 \mu s=9\mu s
+$$
+
+Que es equivalente a un ciclo de trabajo de $0.45$, en donde el delay de fase, es de $10 \mu s+0.5 \mu s=10.5 \mu s$.
+
+\subsection{Red Snubber RCD}
+
+Se implementa una pequeña red snubber RCD para los dispositivos IGBT, la misma está compuesta por un capacitor de $1 \ nF$ y un resistor de $1 \ k \Omega$.
 
 
 \clearpage
@@ -358,18 +473,16 @@ Por efectos de la topología, en este caso no es necesario utilizar un inductor 
 
 \section{Simulación}
 
-\subsection{Simulación ideal}
+Para esta simulación se trabaja con PLECS (Plexim), en su versión más reciente (4.8) corriendo en MacOS Sonoma. Se trabaja con la versión standalone del programa y se corren las simulaciones mediante localhost con un script de Python.
 
-Para esta simulación se trabaja con PLECS (Plexim). En donde no es necesario implementar circuitos disparadores para los transistores IGBT. La idea es ilustrar una primera aproximación, para luego con otro simulador obtener una salida real.
-
-\subsubsection{Circuito implementado}
+\subsection{Circuito implementado}
 
 Para una simulación con componentes ideales, se trabaja con el software de simulación PLECS, en su versión 4.8 (corriendo en sistema operativo MacOS). Se parte del siguiente esquemático a implementar. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../schematic_mod}
-	\caption{Circuito esquemático en PLECS.}
+	\includegraphics[width=1\linewidth]{img/schematic}
+	\caption{Esquemático del circuito implementado en PLECS.}
 	\label{fig:schematic}
 \end{figure}
 
@@ -384,95 +497,255 @@ El diodo volante conectado al inductor $L_{in}$ sirve para proteger el circuito 
 
 Los resistores en serie con cada uno de los capacitores se usan a modo de protección contra saltos discretos de los valores de tensión o corriente en los capacitores. Esto es por la forma en que el simulador PLECS interpreta los modelos, en la página web del software recomiendan una resistencia de pequeño valor en serie para poder mitigar estos efectos. Para todos los casos se usan resistores de $1 \ m\Omega$.
 
+\subsection{Formas de onda}
 
-\subsubsection{Ajuste de capacitores}
+\subsubsection{Señales de disparo}
 
-Se realiza un barrido por sobre los capacitores de salida, colocando a ambos del mismo valor. En este barrido se busca medir el ripple por sobre la forma de onda de la tensión. Se toma como referencia la disponibilidad de capacitores de la marca Advance Capacitors, en donde se tiene disponibilidad de capacitores en el rango $5 \ \mu F - 1600 \ \mu F$.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../ripple}
-	\caption{Variación del ripple con la capacitancia.}
-	\label{fig:ripple}
-\end{figure}
-
-Puede verse en la figura anterior, cómo claramente el riple disminuye con el aumento de la capacitancia, sin embargo, para valores a partir de $400 \ \mu F$, no disminuye el error prácticamente, por lo que se toma ese como valor final para el diseño, evitando sobredimensionar.
-
-\subsubsection{Señales de disparo de los IGBT}
-
-Se utiliza como referencia, el tiempo muerto de la bilbiografía, que es de $0.48 \ \mu s$, para ello, se parte de un ciclo de trabajo de $d=0.5$, lo que implica que se tiene una señal de disparo para $S_L$ con ese duty cycle y sin delay de fase. Ahora, para el disparo del IGBT inferior, se calcula:
-
-$$d_{SL} = 0.5 - \frac{2\cdot 0.48 \mu s}{20 \ \mu s}=0.452$$
-
-Y, para el delay:
-
-$$t_{SL}=(1-d_{SL})\cdot 20 \ \mu s - 0.48 \ \mu s= 10.48 \ \mu s$$
-
-Se muestran a continuación las formas de onda de las señales de disparo de cada uno de los IGBT. 
+Las formas de onda de disparo de los transistores IGBT son las que se muestran en la figura 14. Allí es posible apreciar el tiempo muerto simétrico existente entre las conmutaciones de ambos dispositivos de switching.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../disparo}
-	\caption{Señales de disparo de los generadores de pulso.}
+	\includegraphics[width=1\linewidth]{img/disparo}
+	\caption{Señales de disparo de los IGBT.}
 	\label{fig:disparo}
 \end{figure}
 
-Para este caso ideal, la tensión utilizada para disparar a los transistores es de $10 \ V$. Se puede apreciar la diferencia entre los ciclos de trabajo de cada uno de los trenes de pulso, sin embargo son similares.
+\subsubsection{Señales de salida}
 
-\subsubsection{Formas de onda en el transformador}
-
-En cuanto al transformador, se tienen las siguientes formas de onda para las tensiones.
+Ahora, para la tensión y corriente de salida, se tienen las siguientes formas de onda. Vale aclarar que se toma como referencia la salida de mayor potencia del diseño. Eso se logra con un resistor, como fue calculado anteriormente, de $100 \ \Omega$. En la figura se puede apreciar ese pequeño ripple, así como también que el tiempo de establecimiento de la señal es muy pequeño, existiendo un sobrepasamiento de $21 \ V$, es decir, $5\%$.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../tensiones_transformador}
+	\includegraphics[width=1\linewidth]{img/salida_40}
+	\caption{Señales de salida para máxima carga.}
+	\label{fig:salida40}
+\end{figure}
+
+De forma de apreciar mejor el transitorio, se ilustra a continuación, en la figura 16 el mismo en la onda de tensión. Vale la pena destacar que para ambas señales mostradas en la figura 15 la forma es la misma, cambia la escala por tratarse de diferentes magnitudes eléctricas.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/transitorio}
+	\caption{Transitorio de la señal de salida.}
+	\label{fig:transitorio}
+\end{figure}
+
+El tiempo de establecimiento, medido con el programa de simulación y Python es de aproximadamente $0.35 \ ms$, es decir, se trata de un sistema rápido para la mayoría de aplicaciones.
+
+
+Ahora, la señal de potencia de la salida del convertidor para la carga máxima se ve a continuación.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/potencia}
+	\caption{Potencia de salida para máxima carga.}
+	\label{fig:potencia}
+\end{figure}
+
+\subsubsection{Señales en los IGBTs}
+
+Las formas de onda por sobre los transistores IGBT se muestran a continuación, se encuentra una tensión máxima de colector emisor de $92 \ V$, y una corriente de colector eficaz de $115.16 \ A$, valores que posteriormente serán utilizados para la selección del componente.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/signal_IGBT}
+	\caption{Señales de tensión y corriente en los IGBT implementados.}
+	\label{fig:signaligbt}
+\end{figure}
+
+\subsubsection{Señales en el transformador}
+
+Las tensiones en los devanados del transformador se pueden apreciar en la siguiente figura.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../../tensiones_transformador}
 	\caption{Tensiones en los devanados del transformador.}
 	\label{fig:tensionestransformador}
 \end{figure}
 
-
-Ahora, para las corrientes, las formas de onda son las siguientes.
+Mientras que a continuación se muestran los valores de corriente en el mismo transformador elevador del circuito implementado.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../corrientes_transformador}
+	\includegraphics[width=1\linewidth]{../../corrientes_transformador}
 	\caption{Corrientes en los devanados del transformador.}
 	\label{fig:corrientestransformador}
 \end{figure}
 
-Pueden apreciarse algunos sobrepicos de corriente, sin embargo el filtro de salida compuesto por el rectificador, así como los capacitores se encargan de no permitir el paso de esos transistorios de la conmutación a la carga.
 
+\clearpage
 
-\subsubsection{Formas de onda de la señal de salida}
+\section{Selección de componentes}
 
-Finalmente, las formas de onda más importantes, la salida. En este caso, se toma como referencia una resistencia de $40 \ \Omega$, lo que implica que se está entregando la máxima corriente de diseño para un único convertidor.
+\subsection{Criterios a adoptar}
+
+Para la selección de diodos, se toman en cuenta los dos siguientes parámetros:
+
+\begin{itemize}
+	\item Tensión inversa repetitiva máxima $V_{RRM}$
+	\item Corriente promedio $I_{F(av)}$
+\end{itemize}
+
+Para los IGBTs:
+
+\begin{itemize}
+	\item Tensión máxima en colector-emisor $V_{CE(max)}$
+	\item Corriente eficaz por el colector $I_{C(rms)}$
+	\item Tiempo de recuperación inversa $t_{rr}$
+\end{itemize}
+
+Y, para los capacitores se tiene en cuenta la máxima tensión a soportar.
+
+Finalmente, para los valores de tensión encontrados como parámetro, se usa un factor de seguridad de $2.5$, mientras que para valores de corriente el factor será de $1.3$.
+
+\subsection{Selección del IGBT}
+
+Para seleccionar el IGBT, se tienen los siguientes parámetros:
+
+\begin{itemize}
+	\item $I_{C(rms)}=117 A$
+	\item $V_{CE(max)} = 92 V$
+	\item $T_s=20\mu s$
+\end{itemize}
+
+Lo que resulta aplicando factores de seguridad, y proponiendo que el tiempo de recuperación inversa sea menor al $10\%$ del período de conmutación:
+
+\begin{itemize}
+	\item $I_C(=152.1A$
+	\item $V_{BR} = 230V$
+	\item $t_{rr} = 2 \mu s$
+\end{itemize}
+
+Se opta por utilizar el IGBT modelo IXSX 80N60B , de la marca IXYS. 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Símbolo} & \textbf{Condiciones de prueba} & \textbf{Valores máximos} \\ \hline
+		VCES & TJ = 25°C to 150C & 600 V \\ \hline
+		VCGR & TJ = 25°C to 150C; RGS = 1 MΩ & 600 V \\ \hline
+		VGES & Continuous & ±20 V \\ \hline
+		VGEM & Transient & ±30 V \\ \hline
+		IC25 & TC = 25C (silicon chip capability) & 160 A \\ \hline
+		IC90 & TC = 90C (silicon chip capability) & 80 A \\ \hline
+		IL(RMS) & TC = 90C (silicon chip capability) & 75 A \\ \hline
+		ICM & TC = 25C, 1 ms & 300 A \\ \hline
+		SSOA (RBSOA) & VGE = 15 V, TVJ = 125C, RG = 5 Ω & ICM = 160 A \\
+		& Clamped inductive load @ 0.8 VCES & \\ \hline
+		tsc & VGE = 15 V, VCE = 0.6 VCES, TJ = 125°C & 10 µs \\ \hline
+		SCSOA & RG = 5 Ω, non-repetitive & \\ \hline
+		PC & TC = 25°C & 500 W \\ \hline
+		TJ &  & -55 ... +150 C \\ \hline
+		TJM &  & 150 C \\ \hline
+		Tstg &  & -55 ... +150 C \\ \hline
+		TL & 1.6 mm (0.063 in.) from case for 10 s & 300 C \\ \hline
+		Md & Mounting torque TO-264 & 0.4/6 Nm/lb.in. \\ \hline
+		td(on) &  & 60 ns \\ \hline
+		tri &  & 45 ns \\ \hline
+		td(off) &  & 140 280 ns \\ \hline
+		tfi &  & 180 280 ns \\ \hline
+		Eoff &  & 4.2 7.0 mJ \\ \hline
+	\end{tabular}
+	\caption{Características del IGBT seleccionado.}
+	\label{tab:test_conditions}
+\end{table}
+\clearpage
+
+\subsection{Selección de diodos}
+
+\subsubsection{Diodos de snubber}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../salida_40}
-	\caption{Formas de onda a la salida del transformador.}
-	\label{fig:salida40}
+	\includegraphics[width=1\linewidth]{img/diodo_snubber}
+	\caption{Corriente en el diodo de snubber}
+	\label{fig:diodosnubber}
 \end{figure}
 
-Se puede apreciar que no se tienen exactamente los valores medios deseados de $400 \ V$ y $10 \ A$. Esto es por el sobredimensionamiento que se le realizó al transformador para contemplar las pérdidas de los componentes y por el hecho de que la simulación en PLECS no contempla esas no idealidades. Sin embargo, posteriormente en la simulación de un circuito real se podrá apreciar un valor mucho más similar al de diseño.
 
-Ahora, se analiza la regulación del circuito, para ello, se realizará un barrido en la resistencia de salida, de valores entre $40 \ \Omega - 40000 \ \Omega$.
+De la simulación, se obtiene como valor medio de corriente por los diodos $0.047 \ A$, por lo que, afectando ese valor por el factor de seguridad propuesto, se obtiene como parámetro de selección $I_{F(av)}=0.06 \ A$, y, como tensión inversa repetitiva máxima, se usa un valor de $92 \ V$, siendo este el que soporta como máximo cada IGBT, obteniéndose así para seleccionar $V_{RRM}=230 \ V$. 
+
+Con los parámetro mencionados, se selecciona el diodo 1N4004, fabricado por Vishay, cuyas características se adjuntan a continuación.
+
+\begin{table}[h]
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Parámetro} & \textbf{Valores} \\
+			\hline
+			IF(AV) & 1.0 A \\
+			\hline
+			VRRM & 400 V \\
+			\hline
+			IFSM (8.3 ms sine-wave) & 30 A \\
+			\hline
+			IFSM (square wave tp = 1 ms) & 45 A \\
+			\hline
+			VF & 1.1 V \\
+			\hline
+			IR & 5.0 $\mu$A \\
+			\hline
+			TJ max. & 150 °C \\
+			\hline
+			Package & DO-41 (DO-204AL) \\
+			\hline
+			Circuit configuration & Single \\
+			\hline
+		\end{tabular}
+		\caption{Características principales del diodo para snubber seleccionado.}
+\end{table}
+
+\subsubsection{Diodos de salida}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../salida_resistencia}
-	\caption{Curva de regulación de tensión de salida del convertidor DC-DC diseñado.}
-	\label{fig:salidaresistencia}
+	\includegraphics[width=0.8\linewidth]{img/diodo_salida}
+	\caption{Señales en el diodo de salida.}
+	\label{fig:diodosalida}
 \end{figure}
 
-Puede verse cómo la salida, que normalmente se establece en $414 \ V$, al aumentar la resistencia se acerca a valores cercanos a $423 \ V$. Se puede ver de esa forma que la regulación individual para cada uno de los convertidores a implementar en paralelo será de aproximadamente $2.17 \%$.
+Puede verse que el diodo no está sometido a una tensión inversa, por lo que el parámetro que queda para seleccionar es el de corriente. Se mide una corriente media de $12.54 \ A$, usando así para seleccionar $I_{F(av)}=16.3 \ A$. Se selecciona el diodo VS-20ETS16THM3 de Vishay, cuyas características principales son las siguientes:
 
+\begin{table}[h]
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Parámetro} & \textbf{Valores} \\
+		\hline
+		IF(AV) & 20 A \\
+		\hline
+		VRRM & 1600 V \\
+		\hline
+		IFSM  & 300 A \\
+		\hline
+		VF & 1.1 V \\
+		\hline
+		TJ max. & 150 °C \\
+		\hline
+		Package & 2L TO-220AC \\
+		\hline
+		Circuit configuration & Single \\
+		\hline
+	\end{tabular}
+	\caption{Características principales del diodo para salida seleccionado.}
+\end{table}
 
+\subsubsection{Diodo volante para el inductor de entrada}
 
+La corriente media por sobre ese diodo es de aproximadamente $170 \ A$, lo que implica que es necesario un valor de selección de $221 \ A$ para la corriente promedio, y, en cuanto a tensión, se verifica que la máxima repetitiva no supera los $0.5 \ V$, por lo que no existiría problema en ese caso. Se selecciona el diodo DL161-250-18 de AS Energi, que tiene un valor de $I_{F(av)} = 250 \ A$ y $V_{RRM}=800 \ V$.
+\subsection{Selección de capacitores}
 
+\subsubsection{Capacitores de entrada y snubber}
 
+Estos capacitores están sometidos a una tensión máxima del mismo valor que la de alimentación, por lo que se usa como valor de selección $120 \ V$. 
 
+Para la entrada, se tienen los capacitores B43416C9707A000 de la empresaTDK), los mismos son de $700 \ \mu F$ y $400 \ V$.
 
+Para la red snubber, se selecciona el capacitor 413F1100(1)D0(2)  de la marca Kemet (Yageo company), existen en valores de $1 \ nF$, por lo que no es necesario una configuración en paralelo.
+
+\subsubsection{Capacitores de salida}
+
+Estos capacitores dobladores de tensión aportan cada uno una tensión de $200 \ V$, por lo que se debe verificar que soporte cada uno una tensión de $500 \ V$. Se selecciona el capacitor A10050014030 de la marca FTcap, que cuenta con exactamente las características  requeridas, así como una tolerancia de $20\%$. En la hoja de datos se menciona el uso en fuentes conmutadas como una de las aplicaciones del mismo, lo que indica que sirve para el propósito de este trabajo práctico. 
 
 
 

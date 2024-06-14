@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 * IGBT SPICE Model\
+.SUBCKT IGBT_model C E G\
+\
+* Parameters\
+.param BVCES=600V\
+.param VGEth_min=4V\
+.param VGEth_typ=6V\
+.param VGEth_max=8V\
+.param ICES_25C=200uA\
+.param ICES_125C=2mA\
+.param IGES=200nA\
+.param VCEsat=2.5V\
+.param VGEth=5V\
+.param VGEon=15V\
+.param Rds=0.01\
+.param gfs=52\
+.param Qg=240n\
+.param Qgc=90n\
+.param Qge=85n\
+.param Cies=6600p\
+.param Coes=660p\
+.param Cres=196p\
+.param Rg=5\
+.param Eon=4.8m\
+.param Eoff=6.7m\
+.param td(on)=60n\
+.param tri=45n\
+.param td(off)=280n\
+.param tfi=280n\
+.param RthJC=0.26K/W\
+.param RthCK=0.15K/W\
+\
+* Electrical model\
+M1 D G E NMOS L=1u W=100u\
+RD D C \{Rds\}\
+RG G GND \{Rg\}\
+CGC G C \{Cies\}\
+CGE G E \{Cres\}\
+COES D GND \{Coes\}\
+\
+* Leakage currents\
+ILEAK C E POLY(1) (BVCES \{ICES_25C\})\
+ILK E C POLY(1) (BVCES \{ICES_125C\})\
+IGES G E POLY(1) (VGE \{IGES\})\
+\
+* Switching times\
+.model NMOS NMOS (LEVEL=3 VTO=\{VGEth_typ\} KP=\{gfs\})\
+\
+* Thermal parameters\
+T1 D C TTHERM\
+RTHJC TTHERM GND \{RthJC\}\
+RTHCK TTHERM GND \{RthCK\}\
+CTH TTHERM GND 1u\
+\
+* Capacities for switching\
+CGG G C \{Qg\}\
+CGD G D \{Qgc\}\
+CGE G E \{Qge\}\
+\
+.ENDS IGBT_model\
+}
