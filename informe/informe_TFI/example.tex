@@ -344,6 +344,27 @@ Y, de forma global, se estaría usando algo como lo siguiente.
 
 En este circuito convertidor por diseñar, no se utilizará una técnica de modulación de ZVS, por lo que no es necesario calcular un inductor $L_{LKp}$ para lograr el cruce por cero en un determinado instante. Esto es por la razón de que la alimentación de entrada es constante, y no será necesario aplicar variaciones en el ciclo de trabajo de las señales de disparo de las llaves $S_U$ y $S_L$.
 
+\subsection{Diagrama en bloques del circuito a implementar}
+
+El circuito a implementar puede representarse mediante un diagrama de bloques como el adjuntado a continuación.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/bloques_un_conversor}
+	\caption{Diagrama en bloques del conversor a implementar.}
+	\label{fig:bloquesunconversor}
+\end{figure}
+
+Se puede apreciar:
+
+\begin{itemize}
+	\item Alimentación: formada por los paneles solares y el inductor de entrada.
+	\item Circuito de control: IGBTs junto con capacitores y señales de disparo.
+	\item Transformador: etapa de elevación de tensión y de aislación de la parte de potencia.
+	\item Doblador de tensión: circuito formado por los diodos y capacitores de salida, que elevan la tensión al doble de la de salida del transformador a partir del uso de la carga en capacitores.
+	\item Carga DC
+\end{itemize}
+
 
 \subsection{Características deseadas}
 
@@ -501,7 +522,7 @@ Los resistores en serie con cada uno de los capacitores se usan a modo de protec
 
 \subsubsection{Señales de disparo}
 
-Las formas de onda de disparo de los transistores IGBT son las que se muestran en la figura 14. Allí es posible apreciar el tiempo muerto simétrico existente entre las conmutaciones de ambos dispositivos de switching.
+Las formas de onda de disparo de los transistores IGBT son las que se muestran en la figura 15. Allí es posible apreciar el tiempo muerto simétrico existente entre las conmutaciones de ambos dispositivos de switching.
 
 \begin{figure}
 	\centering
@@ -521,7 +542,7 @@ Ahora, para la tensión y corriente de salida, se tienen las siguientes formas d
 	\label{fig:salida40}
 \end{figure}
 
-De forma de apreciar mejor el transitorio, se ilustra a continuación, en la figura 16 el mismo en la onda de tensión. Vale la pena destacar que para ambas señales mostradas en la figura 15 la forma es la misma, cambia la escala por tratarse de diferentes magnitudes eléctricas.
+De forma de apreciar mejor el transitorio, se ilustra a continuación, en la figura 17 el mismo en la onda de tensión. Vale la pena destacar que para ambas señales mostradas en la figura 16 la forma es la misma, cambia la escala por tratarse de diferentes magnitudes eléctricas.
 
 \begin{figure}
 	\centering
@@ -573,6 +594,18 @@ Mientras que a continuación se muestran los valores de corriente en el mismo tr
 	\label{fig:corrientestransformador}
 \end{figure}
 
+\subsubsection{Curva de regulación de la salida del circuito}
+
+Se muestra en la siguiente figura el efecto del aumento de la resistencia de salida. Es decir, a menor cantidad de corriente solicitada en la carga, cómo varía el circuito. Puede apreciarse un aumento de la tensión de salida, hasta valores de aproximadamente $409 \ V$, lo que implica que se tiene una regulación de aproximadamente $2.25\%$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/salida_regulacion}
+	\caption{Regulación de la salida del convertidor implementado.}
+	\label{fig:salidaregulacion}
+\end{figure}
+
+
 
 \clearpage
 
@@ -612,7 +645,7 @@ Para seleccionar el IGBT, se tienen los siguientes parámetros:
 Lo que resulta aplicando factores de seguridad, y proponiendo que el tiempo de recuperación inversa sea menor al $10\%$ del período de conmutación:
 
 \begin{itemize}
-	\item $I_C(=152.1A$
+	\item $I_C=152.1A$
 	\item $V_{BR} = 230V$
 	\item $t_{rr} = 2 \mu s$
 \end{itemize}
@@ -651,7 +684,20 @@ Se opta por utilizar el IGBT modelo IXSX 80N60B , de la marca IXYS.
 	\caption{Características del IGBT seleccionado.}
 	\label{tab:test_conditions}
 \end{table}
+
 \clearpage
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/igbt_to}
+	\caption{Vista física del IGBT seleccionado.}
+	\label{fig:igbtto}
+\end{figure}
+
+
+
+
 
 \subsection{Selección de diodos}
 
@@ -696,7 +742,17 @@ Con los parámetro mencionados, se selecciona el diodo 1N4004, fabricado por Vis
 		\caption{Características principales del diodo para snubber seleccionado.}
 \end{table}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/diodo_snu}
+	\caption{Vista física del diodo para snubber seleccionado.}
+	\label{fig:diodosnu}
+\end{figure}
+
+
 \subsubsection{Diodos de salida}
+
+Para poder seleccionar el diodo a utilizar en el circuito de salida, es necesario primero partir de las formas de onda de las señales en el mismo, hablando siempre de tensión y corriente, para poder estimar de forma precisa los parámetros de selección. 
 
 \begin{figure}
 	\centering
@@ -730,9 +786,26 @@ Puede verse que el diodo no está sometido a una tensión inversa, por lo que el
 	\caption{Características principales del diodo para salida seleccionado.}
 \end{table}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/diodo_sal}
+	\caption{Vista física del diodo de salida seleccionado.}
+	\label{fig:diodosalia}
+\end{figure}
+
+
 \subsubsection{Diodo volante para el inductor de entrada}
 
 La corriente media por sobre ese diodo es de aproximadamente $170 \ A$, lo que implica que es necesario un valor de selección de $221 \ A$ para la corriente promedio, y, en cuanto a tensión, se verifica que la máxima repetitiva no supera los $0.5 \ V$, por lo que no existiría problema en ese caso. Se selecciona el diodo DL161-250-18 de AS Energi, que tiene un valor de $I_{F(av)} = 250 \ A$ y $V_{RRM}=800 \ V$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/diodo_entrada}
+	\caption{Vista física del diodo de entrada seleccionado.}
+	\label{fig:diodoentrada}
+\end{figure}
+
+
 \subsection{Selección de capacitores}
 
 \subsubsection{Capacitores de entrada y snubber}
@@ -741,326 +814,524 @@ Estos capacitores están sometidos a una tensión máxima del mismo valor que la
 
 Para la entrada, se tienen los capacitores B43416C9707A000 de la empresaTDK), los mismos son de $700 \ \mu F$ y $400 \ V$.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/capa_entrada}
+	\caption{Vista física de los capacitores de entrada seleccionados.}
+	\label{fig:capaentrada}
+\end{figure}
+
+
 Para la red snubber, se selecciona el capacitor 413F1100(1)D0(2)  de la marca Kemet (Yageo company), existen en valores de $1 \ nF$, por lo que no es necesario una configuración en paralelo.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/capa_snubber}
+	\caption{Vista física del loscapacitores de snubber seleccionados.}
+	\label{fig:capasnubber}
+\end{figure}
 
 \subsubsection{Capacitores de salida}
 
 Estos capacitores dobladores de tensión aportan cada uno una tensión de $200 \ V$, por lo que se debe verificar que soporte cada uno una tensión de $500 \ V$. Se selecciona el capacitor A10050014030 de la marca FTcap, que cuenta con exactamente las características  requeridas, así como una tolerancia de $20\%$. En la hoja de datos se menciona el uso en fuentes conmutadas como una de las aplicaciones del mismo, lo que indica que sirve para el propósito de este trabajo práctico. 
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/capa_salida}
+	\caption{Vista física de los capacitores de salida seleccionados.}
+	\label{fig:capasalida}
+\end{figure}
 
 
+\subsection{Disparo de los IGBT}
+
+Para el disparo de los IGBT es necesario un circuito Bootstrap, de forma de poder aplicar una referencia para la tensión de disparo en la juntura GE. Para ello, se selecciona un integrado del tipo IR2110, de amplia utilización en los disparos de IGBT y MOSFET. Las características de este circuito integrado son las siguientes.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Símbolo} & \textbf{Mín} & \textbf{Máx} & \textbf{Unidad} \\
+		\hline
+		VB & -0.3 & 525 (IR2110) \newline 625 (IR2113) & V \\
+		\hline
+		VS & VB - 25 & VB + 0.3 & V \\
+		\hline
+		VHO & VS - 0.3 & VB + 0.3 & V \\
+		\hline
+		VCC & -0.3 & 25 & V \\
+		\hline
+		VLO & -0.3 & VCC + 0.3 & V \\
+		\hline
+		VDD & -0.3 & VSS + 25 & V \\
+		\hline
+		VSS & VCC - 25 & VCC + 0.3 & V \\
+		\hline
+		VIN & VSS - 0.3 & VDD + 0.3 & V \\
+		\hline
+		dVs/dt & — & 50 & V/ns \\
+		\hline
+		PD & — & 1.6 (DIP) \newline 1.25 (SOIC) & W \\
+		\hline
+		RTHJA & — & 75 (DIP) \newline 100 (SOIC) & °C/W \\
+		\hline
+		TJ & — & 150 & °C \\
+		\hline
+		TS & -55 & 150 & °C \\
+		\hline
+		TL & — & 300 & °C \\
+		\hline
+	\end{tabular}
+	\caption{Características del IR2110.}
+	\label{tab:electrical_characteristics}
+\end{table}
+
+Se toma como referencia una topología obtenida del paper adjuntado como referencia, llamado "An effective IGBT driver circuit for three level neutral point clampled converters". Allí se desarrolla el uso de varios de estos circuitos integrador disparando de a pares de IGBT. En este caso se utiliza un único circuito para disparar de a pares de IGBT en cada conversor. La topología referenciada es la siguiente.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/ir2110}
+	\caption{Topología a implementar en IR2110.}
+	\label{fig:ir2110}
+\end{figure}
+
+Ahora, el cálculo de los resistores y capacitores para el disparo excede a este trabajo práctico, planteándose esa posibilidad para un determinado requerimiento en cuanto a DSP a utilizar. En ese paper se menciona también el uso de un circuito generador de tiempo muerto, en este caso, se pretende usar directamente dos señales independientes desfasadas de modo que ahí esté incluido el delay y el $t_D$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/ir2110_c}
+	\caption{Vista física del circuito IR2110.}
+	\label{fig:ir2110c}
+\end{figure}
 
 
-\clearpage
+Para el disparo, se menciona como posibilidad, el uso de un microcontrolador ESP-32, usando un codigo en C para generar la señales de disparo de cada uno de los IGBT a conectar en el circuito IR2110.
 
-\section{Informes con \LaTeX}
 
-% SUB-SECCIÓN
-% Las sub-secciones se inician con \subsection, si se quiere una sub-sección
-% sin número se pueden usar las funciones \subsectionanum (nuevo subtítulo sin
-% numeración) o la función \subsectionanumnoi para crear el mismo subtítulo sin
-% numerar y sin aparecer en el índice
-\subsection{Una breve introducción}
+\begin{sourcecode}{c}{Generación de señales de disparo en ESP-32.}
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/ledc.h"
+#include "esp_err.h"
+
+// Definiciones de pines para los canales PWM
+#define IGBT_S_PIN    18
+#define IGBT_L_PIN    19
+
+// Frecuencia de la señal PWM en Hz
+#define PWM_FREQUENCY 50000
+
+// Duty cycle de las señales PWM
+#define IGBT_S_DUTY_CYCLE  50.0 // 50%
+#define IGBT_L_DUTY_CYCLE  45.0 // 45%
+
+// Desfase en microsegundos
+#define DELAY_US 10.5
+
+void app_main(void) {
+	// Configuración del temporizador del canal PWM
+	ledc_timer_config_t ledc_timer = {
+		.speed_mode       = LEDC_HIGH_SPEED_MODE,
+		.timer_num        = LEDC_TIMER_0,
+		.duty_resolution  = LEDC_TIMER_10_BIT,
+		.freq_hz          = PWM_FREQUENCY,
+		.clk_cfg          = LEDC_AUTO_CLK
+	};
+	ledc_timer_config(&ledc_timer);
 	
-	Este es un párrafo, puede contener múltiples \quotes{Expresiones} así como fórmulas o referencias\footnote{Las referencias se hacen utilizando la expresión \texttt{\textbackslash label}\{etiqueta\}.} como \eqref{eqn:identidad-imposible} o (\ref{img:anexo-2}). A continuación se muestra un ejemplo de inserción de imágenes (como la Figura \ref{img:testimage}) con el comando \href{https://latex.ppizarror.com/informe.html#hlp-imagen}{\textbackslash insertimage}:
-
-	% Esta instrucción, añadida en la v6.5.5 permite cambiar el título de cada
-	% objeto en el índice de cada objeto. Este título es solo válido hasta el
-	% primer objeto que lo llame, luego este se restablecerá. Por mientras solo
-	% se ofrece compatibilidad para las funciones de imágenes. Los entornos como
-	% images o sourcecode aún no tienen compatibilidad
-	\setindexcaption{Título de la imagen en el índice.}
-
-	% Para insertar una imagen se puede usar la función \insertimage la cual
-	% toma un primer parámetro opcional para definir una etiqueta (dentro de
-	% los corchetes), luego toma la dirección de la imagen, sus parámetros
-	% (en este caso se definió la escala de 0.12) y una leyenda opcional
-	\insertimage[\label{img:testimage}]{ejemplos/test-image.png}{scale=0.12}{Where are you? de \quotes{Internet}.}
-
-	A continuación\footnote{Como se puede observar las funciones \texttt{\textbackslash insert...} añaden un párrafo automáticamente.} se muestra un ejemplo de inserción de ecuaciones simples con el comando \href{https://latex.ppizarror.com/informe.html#hlp-formulae}{\textbackslash insertequation}:
-
-	% Se inserta una ecuación, el primer parámetro entre [] es opcional
-	% (permite identificar con una etiqueta para poder referenciarlo después
-	% con \ref), seguido de aquello se escribe la ecuación en modo bruto sin signos $
-	\insertequation[\label{eqn:identidad-imposible}]{\pow{a}{k}=\pow{b}{k}+\pow{c}{k} \quad \forall k>2}
-
-	% Notar que no se requiere añadir un salto de línea después de insertar una imagen
-	Este template \cite{template} ha sido diseñado para que sea completamente compatible con editores \LaTeX\ para escritorio y de manera online\scite{overleaf}. La compilación es realizada siempre usando las últimas versiones de las librerías, además se incluyen los parches oficiales para corregir eventuales \textit{warnings}. \\
-
-	Este es un nuevo párrafo. Para crear uno basta con usar \textbackslash\textbackslash\ en el anterior, lo que fuerza una nueva línea. También se pueden insertar con el comando \texttt{\textbackslash newp} si el compilador de latex arroja una alerta del tipo \textit{Underfull \textbackslash hbox (badness 10000) in paragraph at lines ...}
-
-% SUB-SECCIÓN
-\subsection{Añadiendo tablas}
-
-	También puedes usar tablas, ¡Crearlas es muy fácil!. Puedes usar el plugin \href{https://www.ctan.org/tex-archive/support/excel2latex}{Excel2Latex} \cite{excel2latex} de Excel para convertir las tablas a \LaTeX\ o bien utilizar el \quotes{creador de tablas online} \cite{tablesgenerator}.
-
-	% Tabla generada con el plugin Excel2Latex
-	\begin{table}[H]
-		\centering
-		\caption{Ejemplo de tablas.}
-		\begin{tabular}{ccc}
-			\hline
-			\textbf{Columna 1} & \textbf{Columna 2} & \textbf{Columna 3} \bigstrut\\
-			\hline
-			$\omega$ & $\nu$ & $\delta$ \bigstrut[t]\\
-			$\xi$ & $\kappa$ & $\varpi$ \bigstrut[b] \\
-			\hline
-		\end{tabular}
-		\label{tab:tabla-1}
-	\end{table}
-
-
-% ------------------------------------------------------------------------------
-% NUEVA SECCIÓN
-% ------------------------------------------------------------------------------
-\clearpage
-\section{Aquí un nuevo tema}
-
-% SUB-SECCIÓN
-\subsection{Haciendo informes como un profesional}
-
-	% Se inserta una imagen flotante en la izquierda del documento con
-	% \insertimageleft, al igual que las demás funciones, el primer parámetro
-	% es opcional, luego viene la ubicación de la imagen, seguido de la escala
-	% (un 30% del ancho de página) y por último su leyenda. Para insertar una
-	% imagen flotante en la derecha se utiliza \insertimageright usando los
-	% mismos parámetros
-	\insertimageleft[\label{img:imagen-izquierda}]{ejemplos/test-image-wrap}{0.3}{Apolo flotando a la izquierda.}
-
-	~ \lipsum[1] \\
-
-	% Párrafos de ejemplo
-	\lipsum[115]
-
-	% Agrega una ecuación en el índice
-	\insertindexequation[\label{eqn:formulasinsentido}]{\int_{a}^{b} f(x) \dd{x} = \fracnpartial{f(x)}{x}{\eta} \cdotp \textstyle \sum_{x=a}^{b} f(x)\cancelto{1+\frac{\epsilon}{k}}{\bigp{1+\Delta x}}}{Ecuación sin sentido.}
-
-	% Inserta una definición, compatibilidad con otros templates
-	\begin{defn}[ver \cite{einstein}]
-		Definición definitiva
-		$$\frac{d}{dx}\int_a^xf(y)dy=f(x)$$
-	\end{defn}
-
-	\lipsum[115]
-
-% Inserta un subtítulo sin número
-\subsection{Otros párrafos más normales}
-
-	% Párrafos
-	\lipsum[7]
-
-	% Se inserta una ecuación larga con el entorno gathered (1 solo número de ecuación)
-	\insertgathered[\label{eqn:eqn-larga}]{
-		\lpow{\Lambda}{f} = \frac{L\cdot f}{W} \cdot \frac{\pow{\lpow{Q}{e}}{2}}{8 \pow{\pi}{2} \pow{W}{4} g} + \sum_{i=1}^{l} \frac{f \cdot \bigp{M - d}}{l \cdot W} \cdot \underequal{\frac{\pow{\bigp{\lpow{Q}{e}- i\cdot Q}}{2}}{8 \pow{\pi}{2} \pow{W}{4} g}}{\sim \A}\\
-		Q_e = 2.5Q \cdot \int_{0}^{e} V(x) \dd{x} + \aasin{\biggp{1+\frac{1}{1-e}}}
-	}
-
-	% Nuevo párrafo
-	\lipsum[2]
-
-	% Se inserta un multicols, con esto se pueden escribir párrafos en varias columnas
-	\begin{multicols}{2}
-
-		% Párrafo 1
-		\lipsum[4]
-
-		% Ecuación encerrada en una caja
-		\insertequation[]{ \boxed{f(x) = \fracdpartial{u}{t}} }
-		
-		% Párrafo 2
-		\lipsum[5]
-
-	\end{multicols}
-
-% SUB-SECCIÓN
-\subsection{Ejemplos de inserción de código fuente}
-
-	% A continuación se crea una función auxiliar, esta es una herramienta
-	% extremadamente importante y muy útil. Esta función de ejemplo toma dos
-	% parámetros, uno es el lenguaje del código fuente, el segundo el
-	% identificador en el manual
-	\newcommand{\insertsrcmanual}[2]{\href{https://latex.ppizarror.com/informe.html?srctype=#1\#hlp-srccode}{#2}}
-
-	El template permite la inserción de los siguientes lenguajes de programación de forma nativa: \insertsrcmanual{abap}{ABAP}, \insertsrcmanual{ada}{Ada}, \insertsrcmanual{assemblerx64}{Assembler x64}, \insertsrcmanual{assemblerx86}{Assembler x86[masm]}, \insertsrcmanual{awk}{Awk}, \insertsrcmanual{bash}{Bash}, \insertsrcmanual{basic}{Basic}, \insertsrcmanual{c}{C}, \insertsrcmanual{caml}{Caml}, \insertsrcmanual{cmake}{CMake}, \insertsrcmanual{cobol}{Cobol}, \insertsrcmanual{cpp}{C++}, \insertsrcmanual{csharp}{C\#}, \insertsrcmanual{css}{CSS}, \insertsrcmanual{csv}{CSV}, \insertsrcmanual{cuda}{CUDA}, \insertsrcmanual{dart}{Dart}, \insertsrcmanual{docker}{Docker}, \insertsrcmanual{elisp}{Elisp}, \insertsrcmanual{elixir}{Elixir}, \insertsrcmanual{erlang}{Erlang}, \insertsrcmanual{fortran}{Fortran}, \insertsrcmanual{fsharp}{F\#}, \insertsrcmanual{glsl}{GLSL}, \insertsrcmanual{gnuplot}{Gnuplot}, \insertsrcmanual{go}{Go}, \insertsrcmanual{haskell}{Haskell}, \insertsrcmanual{html}{HTML}, \insertsrcmanual{ini}{INI}, \insertsrcmanual{java}{Java}, \insertsrcmanual{javascript}{Javascript}, \insertsrcmanual{json}{JSON}, \insertsrcmanual{julia}{Julia}, \insertsrcmanual{kotlin}{Kotlin}, \insertsrcmanual{latex}{LaTeX}, \insertsrcmanual{lisp}{Lisp}, \insertsrcmanual{llvm}{LLVM}, \insertsrcmanual{lua}{Lua}, \insertsrcmanual{make}{Make}, \insertsrcmanual{maple}{Maple}, \insertsrcmanual{mathematica}{Mathematica}, \insertsrcmanual{matlab}{Matlab}, \insertsrcmanual{mercury}{Mercury}, \insertsrcmanual{modula2}{Modula-2}, \insertsrcmanual{objectivec}{Objective-C}, \insertsrcmanual{octave}{Octave}, \insertsrcmanual{opencl}{OpenCL}, \insertsrcmanual{opensees}{OpenSees}, \insertsrcmanual{pascal}{Pascal}, \insertsrcmanual{perl}{Perl}, \insertsrcmanual{php}{PHP}, \insertsrcmanual{plaintext}{Texto plano}, \insertsrcmanual{postscript}{PostScript}, \insertsrcmanual{powershell}{Powershell}, \insertsrcmanual{prolog}{Prolog}, \insertsrcmanual{promela}{Promela}, \insertsrcmanual{pseudocode}{Pseudocódigo}, \insertsrcmanual{python}{Python}, \insertsrcmanual{qsharp}{Q\#}, \insertsrcmanual{r}{R}, \insertsrcmanual{racket}{Racket}, \insertsrcmanual{reil}{Reil}, \insertsrcmanual{ruby}{Ruby}, \insertsrcmanual{rust}{Rust}, \insertsrcmanual{scala}{Scala}, \insertsrcmanual{scheme}{Scheme}, \insertsrcmanual{scilab}{Scilab}, \insertsrcmanual{simula}{Simula}, \insertsrcmanual{sparql}{SPARQL}, \insertsrcmanual{sql}{SQL}, \insertsrcmanual{swift}{Swift}, \insertsrcmanual{tcl}{TCL}, \insertsrcmanual{vbscript}{VBScript}, \insertsrcmanual{verilog}{Verilog}, \insertsrcmanual{vhdl}{VHDL} y \insertsrcmanual{xml}{XML}. \\
-
-	Para insertar un código fuente se debe usar el entorno \texttt{sourcecode}, o el entorno \texttt{sourcecodep} si es que se quiere utilizar parámetros adicionales. A continuación se presenta un ejemplo de inserción de código fuente en Python (Código \ref{codigo-python}), Java y Matlab:
-
-% Se define el lenguaje del código. Cuidado: Los códigos en LaTeX son sensibles
-% a las tabulaciones y espacios en blanco
-\begin{sourcecode}[\label{codigo-python}]{python}{Ejemplo en Python.}
-import numpy as np
-
-def incmatrix(genl1, genl2):
-	m, n = len(genl1), len(genl2)
-	VT = np.zeros((n*m, 1), int) # Comentario
-\end{sourcecode}
-
-\begin{sourcecode}[]{java}{Ejemplo en Java.}
-import javax.servlet.*;
-
-// Hola mundo
-public class Hola extends GenericServlet {
-	public void service(ServletRequest request, ServletResponse response)
-	throws ServletException, IOException{
-		PrintWriter pw = response.getWriter();
-		pw.println("Hola, mundo!");
-	}
+	// Configuración del canal PWM para IGBT_S
+	ledc_channel_config_t igbt_s_channel = {
+		.gpio_num       = IGBT_S_PIN,
+		.speed_mode     = LEDC_HIGH_SPEED_MODE,
+		.channel        = LEDC_CHANNEL_0,
+		.timer_sel      = LEDC_TIMER_0,
+		.duty           = (1023 * IGBT_S_DUTY_CYCLE) / 100, // duty cycle en resolución de 10 bits
+		.hpoint         = 0
+	};
+	ledc_channel_config(&igbt_s_channel);
+	
+	// Configuración del canal PWM para IGBT_L con desfase
+	ledc_channel_config_t igbt_l_channel = {
+		.gpio_num       = IGBT_L_PIN,
+		.speed_mode     = LEDC_HIGH_SPEED_MODE,
+		.channel        = LEDC_CHANNEL_1,
+		.timer_sel      = LEDC_TIMER_0,
+		.duty           = (1023 * IGBT_L_DUTY_CYCLE) / 100, // duty cycle en resolución de 10 bits
+		.hpoint         = (uint32_t)((PWM_FREQUENCY * DELAY_US) / 1e6) * 1024 / PWM_FREQUENCY // hpoint para desfase
+	};
+	ledc_channel_config(&igbt_l_channel);
+	
+	// Iniciar el PWM
+	ledc_fade_func_install(0);
 }
+
 \end{sourcecode}
 
-\begin{sourcecode}{matlab}{Ejemplo en Matlab.}
-% Se crea gráfico
-f = figure(1); hold on; movegui(f, 'center');
+Las características del microcontrolador a usar son:
 
-fad = ones(1, NDATOS); % Arreglo para el FAD
-for i = 1:NDATOS
-	[t, u_t, ~, ~] = main(BETA(j), r(i), M, K, F0, 0);
-	fad(i) = max(abs(u_t)) / uf0;
-end
-\end{sourcecode}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Característica} & \textbf{Especificación} \\
+		\hline
+		Procesador & Doble núcleo Xtensa LX6 \\
+		\hline
+		Velocidad de reloj & Hasta 240 MHz \\
+		\hline
+		RAM & 520 KB SRAM \\
+		\hline
+		Memoria Flash & Hasta 16 MB (flash externo) \\
+		\hline
+		Conectividad inalámbrica & Wi-Fi 802.11 b/g/n \newline Bluetooth 4.2 \\
+		\hline
+		Pines GPIO & 34 \\
+		\hline
+		Canales ADC & 18 \\
+		\hline
+		Canales DAC & 2 \\
+		\hline
+		Interfaces SPI & 4 \\
+		\hline
+		Interfaces I2C & 2 \\
+		\hline
+		Interfaces UART & 3 \\
+		\hline
+		Voltaje de operación & 3.0V a 3.6V \\
+		\hline
+		Consumo de energía & 5 µA (sueño profundo) \newline 180 mA (activo) \\
+		\hline
+		Rango de temperatura & -40°C a 125°C \\
+		\hline
+	\end{tabular}
+	\caption{Características principales del ESP-32.}
+	\label{tab:caracteristicas_esp32}
+\end{table}
 
-% SUB-SECCIÓN
-\subsection{Agregando múltiples imágenes}
-
-	El template ofrece el entorno \href{https://latex.ppizarror.com/informe#hlp-images}{images} que permite insertar múltiples imágenes de una manera muy sencilla. Para crear imágenes múltiples se deben usar las siguientes instrucciones:
-
-\begin{sourcecode}{latex}{}
-\begin{images}[\label{imagenmultiple}]{Ejemplo de imagen múltiple.}
-	\addimage[\label{ciudadfoto}]{ejemplos/test-image}{width=6.5cm}{Ciudad}
-	\addimageanum{ejemplos/test-image-wrap}{width=5cm}
-	\imagesnewline
-	\addimage{ejemplos/test-image}{width=12cm}{Ciudad más grande}
-\end{images}
-\end{sourcecode}
-
-	Obteniendo así: \\
-
-	\begin{images}{Ejemplo de imagen múltiple.}
-		\addimage{ejemplos/test-image}{width=6.5cm}{Ciudad}
-		\addimageanum{ejemplos/test-image-wrap}{width=5cm}
-		\imagesnewline
-		\addimage{ejemplos/test-image}{width=12cm}{Ciudad más grande}
-	\end{images}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/esp32}
+	\caption{Vista física del microcontrolador elegido para disparo de IGBTs.}
+	\label{fig:esp32}
+\end{figure}
 
 
-% ------------------------------------------------------------------------------
-% NUEVA SECCIÓN
-% ------------------------------------------------------------------------------
-% Inserta una sección sin número
 \clearpage
-\sectionanum{Más ejemplos}
 
-% Inserta un subtítulo sin número
-\subsectionanum{Listas y Enumeraciones}
+\section{Implementación física}
 
-	Hacer listas enumeradas con \LaTeX\ es muy fácil con el template\footnote{También puedes revisar el manual de las enumeraciones en \url{https://latex.ppizarror.com/doc/enumitem.pdf}.}, para ello debes usar el comando \texttt{\textbackslash begin\{enumerate\}}, cada elemento comienza por \texttt{\textbackslash item}, resultando así:
+En este desarrollo de trabajo práctico no se contempla el diseño de un transformador para los conversores, por lo que, en un diseño de una placa PCB se utilzan bornes de conexión simplemente, en donde se conectan los bornes de cada uno de los devanados. También se tiene de forma externa una carga y la fuente de alimentación (paneles solares en paralelo), para que se pueda manejar de forma correcta externamente.
 
-	\begin{enumerate}
-		\item Grecia
-		\item Abracadabra
-		\item Manzanas
-	\end{enumerate}
+Se propone un diseño individual de conversor a implementar en una PCB, en donde se tienen en cuenta las aclaraciones hechas en el párrafo anterior, y, donde, por las limitaciones del software utilizado, existen leves discrepancias en el tema de dimensiones de los componentes físicos reales para:
 
-	También se puede cambiar el tipo de enumeración, se pueden usar letras, números romanos, entre otros. Esto se logra cambiando el \textbf{label} del objeto \texttt{enumerate}. A continuación se muestra un ejemplo usando letras con el estilo \texttt{\textbackslash alph}\footnote{Con \texttt{\textbackslash Alph} las letras aparecen en mayúscula.}, números romanos con \texttt{\textbackslash roman}\footnote{Con \texttt{\textbackslash Roman} los números romanos salen en mayúscula.} o números griegos con \texttt{\textbackslash greek}\footnote{Una característica propia del template, con \texttt{\textbackslash Greek} las letras griegas están escritas en mayúscula.}:
+\begin{itemize}
+	\item Capacitores de entrada: para tener la dimensión correcta se usan montados en horizontal.
+	\item Capacitor de snubber $1 \ mm$ más corto que el original.
+	\item Capacitor de salida $10 \ mm$ más reducido en su dimensión del diámetro.
+\end{itemize}
 
-	\begin{multicols}{3}
-		\begin{enumeratebf}[label=\alph*) ] % Fuente en negrita
-			\item Peras
-			\item Manzanas
-			\item Naranjas
-		\end{enumeratebf}
+Para el diseño del esquemático y posteriormente la PCB a implementar se utiliza el programa KiCAD en su versión 8.0 (corriendo en MacOS Sonoma). Se logra primero el esquemático adjuntado a continuación.
 
-		\begin{enumerate}[label=\roman*) ]
-			\item Rojo
-			\item Café
-			\item Morado
-		\end{enumerate}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/diseño}
+	\caption{Esquemático del circuito implementado.}
+	\label{fig:diseno}
+\end{figure}
 
-		\begin{enumerate}[label=\greek*) ]
-			\item Matemáticas
-			\item Lenguaje
-			\item Filosofía
-		\end{enumerate}
-	\end{multicols}
+Y, se tiene la siguiente vista de la ventana de edición de la PCB.
 
-	Para hacer listas sin numerar con \LaTeX\ hay que usar el comando \texttt{\textbackslash begin\{itemize\}}, cada elemento empieza por \texttt{\textbackslash item}, resultando:
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{img/pcb_edit}
+	\caption{Vista de la ventana de edición de PCB en KiCAD.}
+	\label{fig:pcbedit}
+\end{figure}
 
-	\begin{multicols}{3}
-		\begin{itemize}[label={--}]
-			\item Peras
-			\item Manzanas
-			\item Naranjas
-		\end{itemize}
+Finalmente, el modelo en 3D de la placa a implementar es el siguiente.
 
-		\begin{enumerate}[label={*}]
-			\item Rojo
-			\item Café
-			\item Morado
-		\end{enumerate}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/pcb3D}
+	\caption{Vista en tres dimensiones de la placa a implementar físicamente.}
+	\label{fig:pcb3d}
+\end{figure}
 
-		\begin{itemize}
-			\item Árboles
-			\item Pasto
-			\item Flores
-		\end{itemize}
-	\end{multicols}
-
-% Inserta un subtítulo sin número
-\subsectionanum{Otros}
-
-	Recuerda revisar el manual de todas las funciones y configuraciones de este template visitando el siguiente link: \url{https://latex.ppizarror.com/informe}. Si encuentras un error en el template, puedes abrir un nuevo issue a través de su página en GitHub.
-
-
-% ------------------------------------------------------------------------------
-% REFERENCIAS, revisar configuración \stylecitereferences
-% ------------------------------------------------------------------------------
 \clearpage
-\bibliography{library}
+
+\section{Conclusiones}
+
+Este apartado se divide en dos secciones, de modo de simplificar la distinción entre puntos de vista aplicados al desarrollo del trabajo práctico.
+
+\subsection{Técnicas}
+
+\begin{itemize}
+	\item Se completó el diseño del circuito de forma exitosa, logrando las especificaciones de diseño solicitadas, junto con las impuestas por el diseñador.
+	\item Se logró una regulación de un $2.25\%$, lo que implica que se tiene una salida de tensión prácticamente constante, incluso para grandes variaciones de carga en el circuito de salida. 
+	\item El tiempo de establecimiento del circuito, incluso para variaciones de carga, siempre se mantiene por debajo de los $0.5 \ ms$, lo que implica que el transitorio es muy corto, permitiendo alimentar cargas desde un inicio, antes del arranque. Relacionado a esto, también es posible mencionar el hecho de que el sobrepasamiento de la respuesta del circuito se mantiene en valores comedidos (alrededor del $5\%$), eliminando riesgos para la conexión de una carga.
+\end{itemize}
+
+\subsection{Personales}
+
+\begin{itemize}
+	\item La conclusión de la materia con un trabajo de esta magnitud es considerada un gran aporte, dado que es necesario aplicar distintos conceptos aprendidos, como: selección de componentes, criterios de diseño, intepretación de formas de onda, cálculos, análisis de resultados, entre otros.
+	\item El circuito solicitado (convertidor semipuente boost compacto) consta de la implementación de varios conceptos vistos a lo largo de la materia, así como de otros no tan profundizados. Esta topologia no se encuentra correctamente explicada en mucha bibliografía por internet, lo que hizo que se haya necesitado ver fuentes confiables. Esto último permitió también, más allá del esfuerzo que requiere el diseño, un ejercicio de búsqueda de bibliografía confiable, considerado muy productivo por parte del alumno.
+\end{itemize}
+
+
+\clearpage
+%\bibliography{library}
+
+\begin{thebibliography}{9}
+	
+	\bibitem{krupa20XX}
+	Krupa, Adam,
+	\textit{Simulation studies of half-bridge isolated DC/DC boost converter},
+	2014.
+	
+	\bibitem{sngate20XX}
+	SN electronics,
+	\textit{Considerations on bootstrap circuitry for gate drivers},
+	Technical Report AN5789, 2022.
+	
+	\bibitem{sayed20XX}
+	Sayed, Khairy,
+	\textit{Boost-Half Bridge Single Power Stage PWM DC-DC Converter for Small Scale Fuel Cell Stack},
+	2006.
+	
+	\bibitem{faizan20XX}
+	Faizan, Muhammad, Wang, Xiaolei, and Yousaf, Muhammad Zain,
+	\textit{Design and Comparative Analysis of an Ultra-Highly Efficient, Compact Half-Bridge LLC Resonant GaN Converter for Low-Power Applications},
+	2023.
+	
+\end{thebibliography}
+
+\clearpage
 
 
 % ------------------------------------------------------------------------------
 % ANEXO
 % ------------------------------------------------------------------------------
 \begin{appendixd}
-
-	\section{Cálculos realizados}
-
-	\subsection{Metodología}
-
-	\lipsum[1] \eqref{eqn:identidad-imposible}
-
-	% Imagen, se numerará automáticamente con la letra del anexo según
-	% la configuración \appendixindepobjnum
-	\insertimage[\label{img:anexo-2}]{ejemplos/test-image.png}{scale=0.19}{Imagen en anexo.}
-
-	\subsection{Resultados}
-
-	\lipsum[10]
-
-	% Tablas
-	\enabletablerowcolor[2] % Activa el color de celda
-	\begin{table}[H]
-		\begin{threeparttable}
+	
+	
+	\section{Script para simular con Python}
+	
+	\begin{sourcecode}{python}{Código de simulación del sistema con Python.}
+	# Import necessary libraries
+	import xmlrpc.client as xml  # For XML-RPC server communication
+	import matplotlib.pyplot as plt  # For plotting graphs
+	import numpy as np  # For numerical operations
+	
+	# Connect to the PLECS XML-RPC server
+	model = 'simulation_modif'  # Define the model name
+	file_type = '.plecs'  # Define the file type
+	plecs = xml.Server('http://localhost:1080/RPC2').plecs  # Create a server object
+	
+	# Set the plotting style
+	plt.style.use('seaborn-v0_8-deep')  # Use a specific style for the plots
+	
+	# Simulate the model and retrieve values and time
+	values = plecs.simulate(model)['Values']  # Get simulation values
+	time = plecs.simulate(model)['Time']  # Get simulation time
+	
+	# Plot trigger signals over time
+	plt.figure(figsize=(10,5))
+	plt.plot(time,values[2],linewidth=2, label='Señal de disparo $S_U$')  # Upper trigger signal
+	plt.plot(time,values[3],linewidth=2, label='Señal de disparo $S_L$')  # Lower trigger signal
+	plt.xlabel('Tiempo (s)')
+	plt.ylabel('Tensión de disparo (V)')
+	plt.title('Señales de disparo en función del tiempo')
+	plt.legend()
+	plt.xlim(0,0.00004)
+	plt.grid(True)
+	plt.savefig('disparo.pdf')  # Save the plot as a PDF file
+	
+	# Plot primary and secondary winding voltages over time
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(time,values[4],linewidth=2)  # Primary winding voltage
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Tensión del devanado primario en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.subplot(2,1,2)
+	plt.plot(time,values[6],linewidth=2)  # Secondary winding voltage
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Tensión del devanado secundario en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.savefig('tensiones_transformador.pdf')  # Save the plot as a PDF file
+	
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(time,values[5],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Corriente en el devanado primario en función del tiempo')
+	plt.grid(True)
+	plt.xlim(8.14e-3,8.2e-3)
+	plt.subplot(2,1,2)
+	plt.plot(time,values[7],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Corriente en el devanado secundario en función del tiempo')
+	plt.grid(True)
+	plt.xlim(8.14e-3,8.2e-3)
+	plt.savefig('corrientes_transformador.pdf')
+	
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(time,values[0],linewidth=2)
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Tensión de salida para $R_o=100\Omega$')
+	plt.grid(True)
+	plt.subplot(2,1,2)
+	plt.plot(time,values[1],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Corriente de salida para $R_o=100\Omega$')
+	plt.grid(True)
+	plt.savefig('informe/informe_TFI/img/salida_100.pdf')
+	
+	plt.figure(figsize=(10,5))
+	plt.plot(time,values[0],linewidth=2)
+	plt.ylabel('Tensión (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Transitorio de tensión de salida para $R_o=100\Omega$')
+	plt.grid(True)
+	plt.xlim(0,4e-3)
+	plt.savefig('informe/informe_TFI/img/transitorio.pdf')
+	
+	voltage = np.array(values[0])
+	current = np.array(values[1])
+	
+	plt.figure(figsize=(10,5))
+	plt.plot(time,voltage*current,linewidth=2)
+	plt.ylabel('Potencia (W)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Potencia de salida para $R_o=100\Omega$')
+	plt.grid(True)
+	plt.savefig('informe/informe_TFI/img/potencia.pdf')
+	
+	# Calculate and print the settling time
+	index_40 = np.where(voltage > 40)[0][0]  # Find the index where voltage exceeds 40V
+	value_90 = 0.9 * 400  # Calculate 90% of 400V
+	for i in range(index_40, len(voltage)):
+	if all(voltage[i:] >= value_90):
+	indice_90_por_ciento = i  # Find the index where voltage stabilizes at 90% of 400V
+	break
+	tiempo_establecimiento = time[indice_90_por_ciento] - time[index_40]  # Calculate settling time
+	print(f"El tiempo de establecimiento es {tiempo_establecimiento} segundos.")  # Print the settling time
+	
+	# Simulate the model for different load resistances and plot the average output voltage and current
+	resistance = np.linspace(100,50000,100)  # Define a range of load resistances
+	v_mean = []  # List to store average voltages
+	i_mean = []  # List to store average currents
+	
+	import time as t  # Import time module for sleep function
+	
+	for r in resistance:
+	plecs.set(model+'/Ro','R',str(r))  # Set the load resistance
+	values = plecs.simulate(model)['Values']  # Simulate the model
+	half = len(values[0])//2  # Find the midpoint of the simulation
+	half_values = values[0][half:]  # Consider values after the midpoint
+	v_mean.append(np.mean(half_values))  # Calculate and store the average voltage
+	i_mean.append(np.mean(values[1][half:]))  # Calculate and store the average current
+	t.sleep(1e-3)  # Short pause between simulations
+	
+	# Plot the average output voltage and current as a function of load resistance
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(resistance,v_mean,linewidth=2)  # Plot average voltage
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Resistencia de carga ($\Omega$)')
+	plt.title('Tensión media de salida en función de la resistencia de carga')
+	plt.grid(True)
+	plt.subplot(2,1,2)
+	plt.plot(resistance,i_mean,linewidth=2)  # Plot average current
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Resistencia de carga ($\Omega$)')
+	plt.title('Corriente media de salida en función de la resistencia de carga')
+	plt.grid(True)
+	plt.savefig('informe/informe_TFI/img/salida_regulacion.pdf')  # Save the plot as a PDF file
+	
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(time,values[8],linewidth=2)
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('$V_{CE}$ para IGBT en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.subplot(2,1,2)
+	plt.plot(time,values[9],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('$I_{C}$ para IGBT en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.savefig('informe/informe_TFI/img/signal_IGBT.pdf')
+	
+	plt.figure(figsize=(10,5))
+	plt.plot(time,values[11],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('Corriente en el diodo snubber')
+	plt.grid(True)
+	plt.xlim(2.75e-1,2.753e-1)
+	plt.savefig('informe/informe_TFI/img/diodo_snubber.pdf')
+	
+	plt.figure(figsize=(10,10))
+	plt.subplot(2,1,1)
+	plt.plot(time,values[13],linewidth=2)
+	plt.ylabel('Tensión (V)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('$V_{D}$ para diodo de salida en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.subplot(2,1,2)
+	plt.plot(time,values[12],linewidth=2)
+	plt.ylabel('Corriente (A)')
+	plt.xlabel('Tiempo (s)')
+	plt.title('$I_{F(av)}$ para diodo de salida en función del tiempo')
+	plt.grid(True)
+	plt.xlim(1.0860e-1,1.0865e-1)
+	plt.savefig('informe/informe_TFI/img/diodo_salida.pdf')
+	
+	\end{sourcecode}
+	
+	\section{Simulación del circuito completo}
+	
+	Se ve en la siguiente figura el circuito completo. Arriba la topología implementada, ya mostrada anteriormente, y abajo los 10 bloques utilizados representando cada convertidor en paralelo.
+	
+	\begin{figure}
 		\centering
-		\caption{Tabla de cálculo.}
-		\begin{tabular}{cccC{4cm}}
-			\hline
-			\textbf{Elemento} & $\epsilon_i$ & \textbf{Valor} & \textbf{Descripción} \bigstrut \\
-			\hline
-			A     & 10    & 3,14$\pi$ & Valor muy interesante\tnote{a} \\
-			B     & 20    & 6 & Segundo elemento \\
-			C     & 30    & 7 & Tercer elemento\tnote{1} \\
-			D     & 150    & 10 & Sin descripción \\
-			E     & 0    & 0 & Cero \\
-			\hline
-			\end{tabular}
-		\begin{tablenotes}
-			\item[a] Este elemento tiene una descripción debajo de la tabla
-			\item[1] Más comentarios
-		\end{tablenotes}
-		\end{threeparttable}
-		\label{tab:anexo-1}
-	\end{table}
-	\disabletablerowcolor % Desactiva el color de celda
+		\includegraphics[width=1\linewidth]{img/schematic_com}
+		\caption{Circuito implementado completo.}
+		\label{fig:schematiccom}
+	\end{figure}
+	
+	Para la máxima carga, las formas de onda de corriente y tensión son las siguientes.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=1\linewidth]{img/salida_completa}
+		\caption{Formas de onda de tensión y corriente de salida para el convertidor a máxima carga.}
+		\label{fig:salidacompleta}
+	\end{figure}
+	
+	Y, finalmente la potencia de salida es la siguiente.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=1\linewidth]{img/potencia_completa}
+		\caption{Forma de onda de potencia de salida para el convertidor a máxima carga.}
+		\label{fig:potenciacompleta}
+	\end{figure}
+	
 
 \end{appendixd}

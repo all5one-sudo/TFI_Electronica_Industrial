@@ -624,13 +624,13 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Scope"
+      Name          "Salida"
       Show          on
       Position      [965, 280]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [273, 56; 1440, 821]
+      Location      [60, 58; 1227, 823]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAFwA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAASPAAAAW/w"
@@ -638,40 +638,45 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAALOAMAAAAFAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAQAAABkAAAABQAAAGQAAAADAAAAZAAABIQAAAALAQAAAQAAAAAAAAAAAA"
-"AAAGT/////AAAAgQAAAAAAAAALAAAAvQAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAA"
-"AAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAA"
-"AAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAACNwAAAAEAAAAAAAAD6AAAAAAT"
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAAEhAAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAAC9AAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"APHAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAA"
+"ABAf////8mLQAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAT/wAAAAAAA"
+"AAAAAAQAAAAEA"
       Axes          "2"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gZGUgc2FsaWRh"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          "Corriente de salida "
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -896,11 +901,11 @@ Plecs {
       Type          Scope
       Name          "Tensiones transformador"
       Show          on
-      Position      [580, 60]
+      Position      [480, 35]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [505, 216; 1440, 821]
+      Location      [361, 145; 1296, 750]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAFwA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAAAAAAAAAPw"
@@ -908,41 +913,45 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAYAAABkAAAABwAAAGQAAAAEAAAAZAAAAAUAAABkAAAAAgAAAGQAAAADAA"
-"AAZAAAAAEAAABkAAAA2wAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAAA2wAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
 "AATAAAAAQAAAAAAAAPoAAAAABM="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAA"
+"ABAf////8mLQAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAT/wAAAAAAA"
+"AAAAAAQAAAAEA"
       Axes          "2"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gZW4gZWwgZGV2YW5hZG8gcHJpbWFyaW8="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gZW4gZWwgZGV2YW5hZG8gc2VjdW5kYXJpbw=="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -986,13 +995,13 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Corriente IGBT"
+      Name          base64 "U2XDsWFsZXMgSUdCVA=="
       Show          on
-      Position      [285, 235]
+      Position      [285, 230]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [374, 56; 1440, 821]
+      Location      [263, 60; 1329, 825]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAIQA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAAQqAAAAW/w"
@@ -1000,52 +1009,58 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL+AIAAAAGAAAAC"
-"QAAAGQAAAAGAAAAZAAAAAcAAABkAAAABAAAAGQAAAAFAAAAZAAAAAMAAABkAAAEHwAAAAsBAAABAA"
-"AAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAAAAQAAAAAAAABkAAAAAQAAAAAAAABkAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAAEHwAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
-"AAAAAQAAAAAAAABkAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAIrAAAAAQAAAAAAAAPoAAAAABM="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"=="
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"ANXAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAA"
+"ABAf////8mLQAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAT/wAAAAAAA"
+"AAAAAAQAAAAEAAAAAAQAAAAEAAAABAAAAAQH//5RFIMWSmwAAAAAAAQAAAAEBAAAAAQAAAAEAAAAB"
+"AAAAAQAAAAEAAAAAAQAAAAE/8AAAAAAAAAAAAAEAAAABAA=="
       Axes          "3"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          "Corriente IGBT"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "U2XDsWFsIGRlIGRpc3Bhcm8gc3VwZXJpb3I="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "U2XDsWFsIGRlIGRpc3Bhcm8gaW5mZXJpb3I="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -1118,13 +1133,13 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Corriente entrada"
+      Name          "Entrada"
       Show          on
-      Position      [50, 205]
+      Position      [50, 170]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [432, 178; 1366, 754]
+      Location      [344, 164; 1278, 740]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAIQA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAAOmAAAAWfw"
@@ -1132,52 +1147,58 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAALeAMAAAAGAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAYAAABkAAAABAAAAGQAAAAFAAAAZAAAAAMAAABkAAADmwAAAAsBAAABAA"
-"AAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAAAAQAAAAAAAABkAAAAAQAAAAAAAABkAAA"
-"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAABk"
-"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAGnAAAAAQAAAAAAAAPoAAAAABM="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"=="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAADmwAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"ALTAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB/////0C3//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAA"
+"ABAf////8mLQAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAT/wAAAAAAA"
+"AAAAAAQAAAAEAAAAAAQAAAAEAAAABAAAAAQH//wRNMsf//wAAAAAAAQAAAAEBAAAAAQAAAAEAAAAB"
+"AAAAAQAAAAEAAAAAAQAAAAE/8AAAAAAAAAAAAAEAAAABAA=="
       Axes          "3"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          "Corriente de entrada"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          "Corriente Diodo Volante"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gRGlvZG8gVm9sYW50ZQ=="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -1385,7 +1406,7 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Scope1"
+      Name          base64 "U2XDsWFsZXMgU251YmJlcg=="
       Show          on
       Position      [550, 380]
       Direction     up
@@ -1399,40 +1420,44 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAALeAMAAAAGAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAYAAABkAAAABAAAAGQAAAAFAAAAZAAAAAMAAABkAAAEUgAAAAsBAAABAA"
-"AAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAAAAQAAAAAAAABkAAAAAQAAAAAAAABkAAA"
-"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAABk"
-"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAJeAAAAAQAAAAAAAAPoAAAAABM="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAAEUgAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AOKAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAA=="
       Axes          "2"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          "Corriente Diodo Snubber"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gRGlvZG8gU251YmJlcg=="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -1514,43 +1539,45 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Scope2"
+      Name          "Tension IGBT"
       Show          on
-      Position      [310, 45]
+      Position      [325, 40]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [544, -767; 932, -539]
+      Location      [468, 198; 1062, 578]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADQA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAAGEAAAAWfw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAYQAAAA+AP///wAAAYQAAABuAAAA"
+"///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABmAP///wAAAAMAAAJSAAAAWfw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAAAlIAAAA+AP///wAAAlIAAAEGAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL+AMAAAAHAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAYAAABkAAAABwAAAGQAAAAEAAAAZAAAAAUAAABkAAAAAwAAAGQAAAGjAA"
-"AACwEAAAEAAAAAAAAAAAAAAABk/////wAAAIEAAAAAAAAACwAAAMgAAAABAAAAAAAAAGQAAAABAAA"
-"AAAAAAGQAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAB"
-"AAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAABMAAAABAAAAAAAAA+gAA"
-"AAAEw=="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAACUgAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADIAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AGKAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQA="
       Axes          "1"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gZW4gSUdCVA=="
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24="
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -1612,7 +1639,7 @@ Plecs {
     }
     Component {
       Type          Scope
-      Name          "Scope3"
+      Name          base64 "U2XDsWFsZXMgZGlvZG8gZGUgc2FsaWRh"
       Show          on
       Position      [665, 20]
       Direction     up
@@ -1626,40 +1653,45 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAALeAMAAAAGAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAYAAABkAAAABAAAAGQAAAAFAAAAZAAAAAMAAABkAAAD0QAAAAsBAAABAA"
-"AAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADHAAAAAQAAAAAAAABkAAAAAQAAAAAAAABkAAA"
-"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAABk"
-"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAHeAAAAAQAAAAAAAAPoAAAAABM="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
+"wAAAGQAAAACAAAAZAAAAAEAAABkAAAABwAAAGQAAAAGAAAAZAAAAAUAAABkAAAABAAAAGQAAAAJAA"
+"AAZAAAAAgAAABkAAAD0QAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADHAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AMKAAAAAQAAAAAAAAPoAAAAABM="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEB//8ETTLH//8AAAAAAAEAAAABAQAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABP/AAAAAAAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAA"
+"ABAf////9At///AAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAT/wAAAAAAA"
+"AAAAAAQAAAAEA"
       Axes          "2"
-      TimeRange     "0.0"
+      TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
       Open          "0"
       Ts            "-1"
       SampleLimit   "0"
-      XAxisLabel    "Time / s"
+      XAxisLabel    "Tiempo (s)"
       ShowLegend    "1"
       Axis {
-        Name          ""
+        Name          "Corriente Diodo de Salida"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     "Corriente (A)"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
       }
       Axis {
-        Name          ""
+        Name          base64 "VGVuc2nDs24gRGlvZG8gZGUgU2FsaWRh"
         AutoScale     1
         MinValue      0
         MaxValue      1
         Signals       {}
         SignalTypes   [ ]
+        AxisLabel     base64 "VGVuc2nDs24gKFYp"
         Untangle      0
         KeepBaseline  off
         BaselineValue 0
@@ -1909,7 +1941,7 @@ Plecs {
       Points        [895, 340]
       Branch {
         Points        [895, 285]
-        DstComponent  "Scope"
+        DstComponent  "Salida"
         DstTerminal   2
       }
       Branch {
@@ -1923,7 +1955,7 @@ Plecs {
       SrcTerminal   3
       Points        [900, 275]
       Branch {
-        DstComponent  "Scope"
+        DstComponent  "Salida"
         DstTerminal   1
       }
       Branch {
@@ -1992,7 +2024,7 @@ Plecs {
         DstTerminal   1
       }
       Branch {
-        Points        [505, 65]
+        Points        [505, 135; 450, 135]
         DstComponent  "Tensiones transformador"
         DstTerminal   2
       }
@@ -2007,7 +2039,7 @@ Plecs {
         DstTerminal   1
       }
       Branch {
-        Points        [405, 200; 425, 200; 425, 55]
+        Points        [405, 200; 425, 200; 425, 30]
         DstComponent  "Tensiones transformador"
         DstTerminal   1
       }
@@ -2087,8 +2119,8 @@ Plecs {
       SrcTerminal   3
       Points        [325, 320]
       Branch {
-        Points        [325, 290; 215, 290; 215, 225]
-        DstComponent  "Corriente IGBT"
+        Points        [325, 290; 215, 290; 215, 220]
+        DstComponent  base64 "U2XDsWFsZXMgSUdCVA=="
         DstTerminal   1
       }
       Branch {
@@ -2128,8 +2160,8 @@ Plecs {
       Type          Signal
       SrcComponent  "Iin"
       SrcTerminal   3
-      Points        [15, 195]
-      DstComponent  "Corriente entrada"
+      Points        [15, 160]
+      DstComponent  "Entrada"
       DstTerminal   1
     }
     Connection {
@@ -2150,7 +2182,7 @@ Plecs {
         }
       }
       Branch {
-        DstComponent  "Corriente IGBT"
+        DstComponent  base64 "U2XDsWFsZXMgSUdCVA=="
         DstTerminal   2
       }
     }
@@ -2171,7 +2203,7 @@ Plecs {
         }
       }
       Branch {
-        DstComponent  "Corriente IGBT"
+        DstComponent  base64 "U2XDsWFsZXMgSUdCVA=="
         DstTerminal   3
       }
     }
@@ -2249,8 +2281,8 @@ Plecs {
       SrcTerminal   3
       Points        [275, 95; 275, 60]
       Branch {
-        Points        [275, 45]
-        DstComponent  "Scope2"
+        Points        [275, 40]
+        DstComponent  "Tension IGBT"
         DstTerminal   1
       }
       Branch {
@@ -2298,7 +2330,7 @@ Plecs {
         DstTerminal   1
       }
       Branch {
-        DstComponent  "Scope1"
+        DstComponent  base64 "U2XDsWFsZXMgU251YmJlcg=="
         DstTerminal   2
       }
     }
@@ -2308,7 +2340,7 @@ Plecs {
       SrcTerminal   3
       Points        [520, 335]
       Branch {
-        DstComponent  "Scope1"
+        DstComponent  base64 "U2XDsWFsZXMgU251YmJlcg=="
         DstTerminal   1
       }
       Branch {
@@ -2337,7 +2369,7 @@ Plecs {
       Points        [680, 170; 540, 170; 540, 115]
       Branch {
         Points        [540, 25]
-        DstComponent  "Scope3"
+        DstComponent  base64 "U2XDsWFsZXMgZGlvZG8gZGUgc2FsaWRh"
         DstTerminal   2
       }
       Branch {
@@ -2352,7 +2384,7 @@ Plecs {
       Points        [545, 180; 545, 100]
       Branch {
         Points        [545, 15]
-        DstComponent  "Scope3"
+        DstComponent  base64 "U2XDsWFsZXMgZGlvZG8gZGUgc2FsaWRh"
         DstTerminal   1
       }
       Branch {
@@ -2365,7 +2397,7 @@ Plecs {
       SrcComponent  "Vm6"
       SrcTerminal   3
       Points        [65, 260; 20, 260]
-      DstComponent  "Corriente entrada"
+      DstComponent  "Entrada"
       DstTerminal   3
     }
     Connection {
@@ -2386,8 +2418,8 @@ Plecs {
       Type          Signal
       SrcComponent  "Am4"
       SrcTerminal   3
-      Points        [10, 305; 10, 205]
-      DstComponent  "Corriente entrada"
+      Points        [10, 305; 10, 170]
+      DstComponent  "Entrada"
       DstTerminal   2
     }
   }

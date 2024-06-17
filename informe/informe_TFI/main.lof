@@ -10,17 +10,31 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces Energía $Q$ utilizada para el dimensionamiento de los capcaitores de snubber.}}{14}{figure.caption.11}%
 \contentsline {figure}{\numberline {11}{\ignorespaces Esquema general de un único conversor.}}{17}{figure.caption.13}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Esquema de conexión final.}}{18}{figure.caption.14}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Esquemático del circuito implementado en PLECS.}}{21}{figure.caption.15}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Señales de disparo de los IGBT.}}{22}{figure.caption.16}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Señales de salida para máxima carga.}}{23}{figure.caption.17}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Transitorio de la señal de salida.}}{24}{figure.caption.18}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Potencia de salida para máxima carga.}}{24}{figure.caption.19}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Señales de tensión y corriente en los IGBT implementados.}}{25}{figure.caption.20}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Tensiones en los devanados del transformador.}}{26}{figure.caption.21}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Corrientes en los devanados del transformador.}}{27}{figure.caption.22}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Corriente en el diodo de snubber}}{30}{figure.caption.24}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Señales en el diodo de salida.}}{31}{figure.caption.26}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Título de la imagen en el índice.}}{33}{figure.caption.28}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Apolo flotando a la izquierda. }}{34}{figure.caption.30}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Ejemplo de imagen múltiple.}}{37}{figure.caption.31}%
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Imagen en anexo. }}{39}{figure.caption.34}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Diagrama en bloques del conversor a implementar.}}{18}{figure.caption.15}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Esquemático del circuito implementado en PLECS.}}{22}{figure.caption.16}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Señales de disparo de los IGBT.}}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Señales de salida para máxima carga.}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Transitorio de la señal de salida.}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Potencia de salida para máxima carga.}}{25}{figure.caption.20}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Señales de tensión y corriente en los IGBT implementados.}}{26}{figure.caption.21}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Tensiones en los devanados del transformador.}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Corrientes en los devanados del transformador.}}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Regulación de la salida del convertidor implementado.}}{29}{figure.caption.24}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Vista física del IGBT seleccionado.}}{32}{figure.caption.26}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Corriente en el diodo de snubber}}{32}{figure.caption.27}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Vista física del diodo para snubber seleccionado.}}{33}{figure.caption.29}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Señales en el diodo de salida.}}{34}{figure.caption.30}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Vista física del diodo de salida seleccionado.}}{34}{figure.caption.32}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Vista física del diodo de entrada seleccionado.}}{35}{figure.caption.33}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Vista física de los capacitores de entrada seleccionados.}}{36}{figure.caption.34}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Vista física del loscapacitores de snubber seleccionados.}}{36}{figure.caption.35}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Vista física de los capacitores de salida seleccionados.}}{36}{figure.caption.36}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Topología a implementar en IR2110.}}{38}{figure.caption.38}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Vista física del circuito IR2110.}}{38}{figure.caption.39}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Vista física del microcontrolador elegido para disparo de IGBTs.}}{41}{figure.caption.41}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Esquemático del circuito implementado.}}{42}{figure.caption.42}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Vista de la ventana de edición de PCB en KiCAD.}}{43}{figure.caption.43}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Vista en tres dimensiones de la placa a implementar físicamente.}}{43}{figure.caption.44}%
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Circuito implementado completo.}}{50}{figure.caption.46}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Formas de onda de tensión y corriente de salida para el convertidor a máxima carga.}}{51}{figure.caption.47}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Forma de onda de potencia de salida para el convertidor a máxima carga.}}{52}{figure.caption.48}%
